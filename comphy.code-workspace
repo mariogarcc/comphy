@@ -5,6 +5,10 @@
 		}
 	],
 	"settings": {
-		"editor.rulers": [79, 120]
+        "editor.rulers": [
+            79,
+            120
+        ],
+        "python.linting.enabled": false
 	}
 }

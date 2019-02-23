@@ -1,4 +1,4 @@
-from module import *
+from package import *
 
 # EXERCISE 1: Given function f(x) = x**2 - 3*x + e**x - 2 = 0 ,
 # analyze the existence of roots in the interval [-2, 4]
@@ -35,7 +35,7 @@ print("Bisection method\n")
 bis_sol_points = []
 for sol in sols:
     print("case: solution in {sol}".format(sol = sol))
-    bis_sol_points.append(bis_solve(f, sol, iters = 63))
+    bis_sol_points.append(bisect_solve(f, sol, iters = 63))
     print("")
 
 
@@ -69,11 +69,11 @@ for sol in sols:
     falsi_asols.append(falsi_solve(f, sol, iters = 7))
     print("")
 
-newrap_sol_points = []
+newt_raph_solve_points = []
 iterations = 15
 for falsi_asol in falsi_asols:
     print("case: approximated solution x = {asol}".format(asol=falsi_asol))
-    newrap_sol_points.append(newrap_sol(f, df, falsi_asol, iterations))
+    newt_raph_solve_points.append(newt_raph_solve(f, df, falsi_asol, iterations))
     print("iterations: {iterations}".format(iterations = iterations))
     print("")
 
@@ -116,7 +116,7 @@ gsize = max(f(xlin)) - min(f(xlin))  # plot vertical size
 
 plt.hlines(0, min(xlin), max(xlin), 'green')
 
-for sol in newrap_sol_points:
+for sol in newt_raph_solve_points:
     # highlight the solution points
     plt.vlines(sol, f(sol)-gsize/20, f(sol)+gsize/20, color='red')
 

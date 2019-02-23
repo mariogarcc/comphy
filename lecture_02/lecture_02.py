@@ -1,4 +1,4 @@
-from module import *
+from package import *
 
 # EXERCISE: Find the roots of y(x) = (29.52/(x-0.12)) * e**(-0.686/x) - 11
 print("""
@@ -21,7 +21,7 @@ sols = find_sols(f, xarr)
 sol_points = []
 for sol in sols:
     print("case: solution in {sol}".format(sol=sol))
-    sol_point = bis_solve(f, sol, 63)
+    sol_point = bisect_solve(f, sol, 63)
     if sol_point is not None:
         sol_points.append(sol_point)
     print("")

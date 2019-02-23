@@ -1,7 +1,7 @@
-from ..module import *
+from ..package import *
 
 __all__ = [
     'find_sols',
-    'bis_solve',
+    'bisect_solve',
     'ask_continue',
 ]
