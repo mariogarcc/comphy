@@ -53,8 +53,7 @@ for sol in sols:
     bisect_sol_points.append(bisect_solve(f, sol, iters = bisect_iters))
     print("solution: x = {sol}"
         .format(sol = bisect_sol_points[sols.index(sol)]))
-    print("iterations: {iters}".format(iters = bisect_iters))
-    print("")
+    print("iterations: {iters}".format(iters = bisect_iters), end = '\n\n')
 
 
 # EXERCISE 3: Calculate the solutions for f(x) using the Regula Falsi method.
@@ -71,8 +70,7 @@ for sol in sols:
     falsi_sol_points.append(falsi_solve(f, sol, iters = falsi_iters))
     print("solution: x = {sol}"
         .format(sol = falsi_sol_points[sols.index(sol)]))
-    print("iterations: {iters}".format(iters = falsi_iters))
-    print("")
+    print("iterations: {iters}".format(iters = falsi_iters), end = '\n\n')
 
 
 # EXERCISE 4: Calculate the roots for f(x) using the Newton-Raphson method.
@@ -97,8 +95,8 @@ for sol in sols:
     falsi_asols.append(falsi_solve(f, sol, iters = falsi_aiters))
     print("approximated solution: x = {asol}"
         .format(asol = falsi_asols[sols.index(sol)]))
-    print("iterations: {iters} (regula falsi)".format(iters = falsi_aiters))
-    print("\n", end = "")
+    print("iterations: {iters} (regula falsi)"
+        .format(iters = falsi_aiters), end = '\n\n')
 
 newt_raph_solve_points = []
 newt_raph_iters = 15
@@ -108,12 +106,11 @@ for falsi_asol in falsi_asols:
         newt_raph_iters))
     print("newton-raphson solution: x = {nrsol}"
         .format(nrsol = newt_raph_solve_points[falsi_asols.index(falsi_asol)]))
-    print("iterations: {iters}".format(iters = newt_raph_iters))
-    print("\n", end = "")
+    print("iterations: {iters}".format(iters = newt_raph_iters), end = '\n\n')
 
 
-# plotting
-    
+# plotting 
+print() 
 print("Plotting follows.")
 ask_continue()
 
@@ -131,9 +128,9 @@ plt.title(r"Bisection", y = 1.03)
 
 plt.plot(xlin, f(xlin), 'blue')
 
-gsize = max(f(xlin)) - min(f(xlin)) # plot vertical size
 plt.xlim(-1.5, 2.5)
 plt.ylim(-5, 10)
+gsize = max(f(xlin)) - min(f(xlin))  # plot vertical size
 
 plt.hlines(0, min(xlin), max(xlin), 'black')
 
@@ -149,9 +146,9 @@ plt.title(r"Regula Falsi", y = 1.03)
 
 plt.plot(xlin, f(xlin), 'blue')
 
-gsize = max(f(xlin)) - min(f(xlin))  # plot vertical size
 plt.xlim(-1.5, 2.5)
 plt.ylim(-5, 10)
+gsize = max(f(xlin)) - min(f(xlin))  # plot vertical size
 
 plt.hlines(0, min(xlin), max(xlin), 'black')
 
@@ -167,9 +164,9 @@ plt.title(r"Newton-Raphson", y = 1.03)
 
 plt.plot(xlin, f(xlin), 'blue')
 
-gsize = max(f(xlin)) - min(f(xlin))  # plot vertical size
 plt.xlim(-1.5, 2.5)
 plt.ylim(-5, 10)
+gsize = max(f(xlin)) - min(f(xlin))  # plot vertical size
 
 plt.hlines(0, min(xlin), max(xlin), 'black')
 
