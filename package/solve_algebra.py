@@ -5,7 +5,8 @@ def solve_ordid(eq):
     """
     Solves a0*x + a1 + ... + aN = b given as a list like `[a0, ..., aN, b]`.
     """
-    eq = np.array([val for val in eq if val != 0])
+    xloc = np.min(np.argwhere(eq != 0))
+    eq = np.array([val for val in eq[xloc:]])
     return (eq[-1] - sum(eq[1:-1]))/eq[0]
 
 
@@ -32,20 +33,20 @@ def solve_triang_mat(mat, shape = 'upper-right', method = 'g-elim',
     temp_mat = copy.deepcopy(mat)
 
     if 'upper' in shape: irows = range(mat.shape[0]-1, -1, -1)
-    elif 'lower' in shape: irows = range(-1, mat.shape[0], 1)
+    elif 'lower' in shape: irows = range(0, mat.shape[0], 1)
 
     sols = []
     for r, rr in zip(irows, reversed(irows)):
 
-        sol = solve_ordid(temp_mat[r,:])
+        solrow = temp_mat[r,:] if 'right' in shape else \
+            np.concatenate((temp_mat[r,:-1][::-1], [temp_mat[r,-1]]))
+        sol = solve_ordid(solrow)
         sols.append(sol)
 
-        if 'right' in shape:
-            v = mat.shape[1]-2-rr
-        elif 'left' in shape:
-            v = rr+1
+        v = mat.shape[1]-1-(rr+1)
 
-        for s in (range(r) if 'upper' in shape else range(1, rr+1)):
+        sr = range(r) if 'upper' in shape else range(r+1, mat.shape[0])
+        for s in sr:
             if method == 'g-elim':
                 temp_mat[s,v] *= sol
             elif method == 'gj-elim':

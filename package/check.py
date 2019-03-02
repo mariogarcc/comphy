@@ -7,7 +7,7 @@ def check_sys_sols(sols, mat, lim = 1e-3, verbose = False):
     """
     permutations = it.permutations(sols)
     minmaxerr = lim # how to make lim and minmaxerr independent?
-
+    psols = dict()
     for permutation in permutations:
         maxerr = 0
         # check if any sum is wrong: sum(a_ij*x_i) =? b_j +- err
@@ -19,14 +19,17 @@ def check_sys_sols(sols, mat, lim = 1e-3, verbose = False):
 
                 # store the maximum value for err, the max error
                 maxerr = val if val > maxerr else maxerr
-
+        
         minmaxerr = maxerr if maxerr < minmaxerr else minmaxerr
+        psols[minmaxerr] = [permutation, minmaxerr]
 
     if minmaxerr != 0 and minmaxerr < lim:
         if verbose:
             print("solutions are not exact up to approx. {!r} precision"
                 .format(minmaxerr))
     elif minmaxerr >= lim:
-        return False
+        return None
 
-    return True
+    correct_perm_key = min([err \
+        for err, perm in zip(psols.keys(), psols.values())])
+    return psols[correct_perm_key][0]
