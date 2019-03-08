@@ -4,15 +4,16 @@ from package import \
     ask_continue
 
 
-# EXERCISE 5: Find the roots of y(x) = (29.52/(x-0.12)) * e**(-0.686/x) - 11
+EXERCISE_5 = """\
+Find the roots of y(x) = (29.52/(x-0.12)) * e**(-0.686/x) - 11\
+"""
 
-print("""
-EXERCISE 5: Find the roots of y(x) = (29.52/(x-0.12)) * e**(-0.686/x) - 11
-""")
+print('', "EXERCISE 5:", EXERCISE_5, sep = '\n', end = '\n\n')
+
 
 import numpy as np
 import warnings
-warnings.filterwarnings('ignore')
+warnings.filterwarnings('ignore', category = RuntimeWarning)
 
 def f(x):  # given function
     return (29.52/(x-0.12)) * np.exp(-0.686/x) - 11
@@ -27,17 +28,12 @@ sols = find_sols(f, xlin)
 
 sol_points = []
 for sol in sols:
-    print("case: solution in {sol}".format(sol=sol))
-    sol_point = bisect_solve(f, sol, 63)
-    if sol_point is not None:
-        sol_points.append(sol_point)
-        print("solution: x = {sol}"
-            .format(sol = sol_points[sol_points.index(sol_point)]))
-        print("iterations: {iters} (bisection method)"
-            .format(iters = 63), end = '\n\n')
-    else:
-        print("false solution: y = oo", end = '\n\n')
+    print("case: solution in {sol}".format(sol=sol), end = '\n')
+    sol_point = bisect_solve(f, sol, 63, verbose = True)
+    sol_points.append(sol_point)
+    print()
 
+sol_points = sol_points[1:] # ignore the false solution
 
 # plotting
 print()
@@ -62,9 +58,12 @@ gsize = plt.ylim()[1] - plt.ylim()[0]
 
 plt.hlines(0, min(xlin)-0.12, max(xlin), 'black', zorder = 0)
 
-for sol in sol_points:
+for i, sol in enumerate(sol_points):
     # highlight the solution points
-    plt.vlines(sol, f(sol)-gsize/20, f(sol)+gsize/20, color='red', zorder = 2)
+    plt.vlines(sol, f(sol)-gsize/20, f(sol)+gsize/20, color = 'red', zorder = 2)
+    plt.text(sol+(0.08 if i != 2 else 0), f(sol)+gsize/(16 if i != 0 else 8),
+        'x = {x:.5f}'.format(x = sol),
+        horizontalalignment = 'center', zorder = 3+i)
 
 
 plt.show()

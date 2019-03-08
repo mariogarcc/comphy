@@ -3,15 +3,15 @@ from package import \
     solve_triang_mat, \
     check_sys_sols
 
-# EXERCISE 5: Make a program that is able to solve a system of equations
-# by the Gauss elimination method without pivoting and solution computing
-# by regressive substitution.
 
-print("""
-EXERCISE 5: Make a program that is able to solve a system of equations
+EXERCISE_6 = """\
+Make a program that is able to solve a system of equations
 by the Gauss elimination method without pivoting and solution computing
-by regressive substitution.
-""")
+by regressive substitution.\
+"""
+
+print('', "EXERCISE 6:", EXERCISE_6, sep = '\n', end = '\n\n')
+
 
 import numpy as np
 

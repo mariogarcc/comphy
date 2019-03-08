@@ -6,14 +6,14 @@ from package import \
     ask_continue
 
 
-# EXERCISE 1: Given function f(x) = x**2 - 3*x + e**x - 2 = 0 ,
-# analyze the existence of roots in the interval [-2, 4]
-
-print("""
-EXERCISE 1: Given the function f(x) = x**2 - 3*x + e**x - 2 = 0 , 
+EXERCISE_1 = """\
+Given the function f(x) = x**2 - 3*x + e**x - 2 = 0 , 
 analyze the existence of roots in the interval [-2, 4] 
-(by dividing [-2, 4] in 20 subintervals and sign-checking)
-""")
+(by dividing [-2, 4] in 20 subintervals and sign-checking)\
+"""
+
+print('', "EXERCISE 1:", EXERCISE_1, sep = '\n', end = '\n\n')
+
 
 import numpy as np
 
@@ -37,13 +37,13 @@ print("There {} in: "
     *sols, sep = '\n', end = '\n\n')
 
 
-# EXERCISE 2: Given an interval where a function has a single root,
-# extrapolate a more precise solution using the bisection method.
+EXERCISE_2 = """\
+Given an interval where a function has a single root, 
+extrapolate a more precise solution using the bisection method.\
+"""
 
-print("""
-EXERCISE 2: Given an interval where a function has a single root, 
-extrapolate a more precise solution using the bisection method.
-""")
+print('', "EXERCISE 2:", EXERCISE_2, sep = '\n', end = '\n\n')
+
 
 print("Bisection method", end = '\n\n')
 bisect_iters = 63
@@ -56,11 +56,11 @@ for sol in sols:
     print("iterations: {iters}".format(iters = bisect_iters), end = '\n\n')
 
 
-# EXERCISE 3: Calculate the solutions for f(x) using the Regula Falsi method.
+EXERCISE_3 = """\
+Calculate the solutions for f(x) using the Regula Falsi method.\
+"""
 
-print("""
-EXERCISE 3: Calculate the solutions for f(x) using the Regula Falsi method.
-""")
+print('', "EXERCISE 3:", EXERCISE_3, sep = '\n', end = '\n\n')
 
 print("Regula Falsi method", end = '\n\n')
 falsi_iters = 63
@@ -73,11 +73,11 @@ for sol in sols:
     print("iterations: {iters}".format(iters = falsi_iters), end = '\n\n')
 
 
-# EXERCISE 4: Calculate the roots for f(x) using the Newton-Raphson method.
+EXERCISE_4 = """\
+Calculate the roots for f(x) using the Newton-Raphson method.\
+"""\
 
-print("""
-EXERCISE 4: Calculate the roots for f(x) using the Newton-Raphson method.
-""")
+print('', "EXERCISE 4:", EXERCISE_4, sep = '\n', end = '\n\n')
 
 def df(x):
     return 2*x + np.exp(x) - 3
@@ -86,7 +86,8 @@ def df(x):
 print(
     "Newton-Raphson method",
     "using Regula Falsi for an approximate solution",
-    sep = '\n', end = '\n\n')
+    sep = '\n', end = '\n\n'
+)
 
 falsi_asols = []
 falsi_aiters = 7
@@ -119,10 +120,11 @@ import matplotlib.pyplot as plt
 plt.rc('text', usetex = True)
 plt.rc('font', family = 'serif')
 
-plt.figure(figsize = (8, 6))
+plt.figure(figsize = (9, 6))
+
+plt.suptitle(r"$y(x) = x^2 - 3x + e^x - 2$", fontsize = 16)
 
 plt.subplot(311)
-plt.tight_layout()
 
 plt.title(r"Bisection", y = 1.03)
 
@@ -137,10 +139,11 @@ plt.hlines(0, min(xlin), max(xlin), 'black')
 for sol in bisect_sol_points:
     # highlight the solution points
     plt.vlines(sol, f(sol)-gsize/20, f(sol)+gsize/20, color = 'red')
+    plt.text(sol, f(sol)+gsize/16, 'x = {x:.5f}'.format(x = sol),
+        horizontalalignment = 'center')
 
 
 plt.subplot(312)
-plt.tight_layout()
 
 plt.title(r"Regula Falsi", y = 1.03)
 
@@ -155,10 +158,11 @@ plt.hlines(0, min(xlin), max(xlin), 'black')
 for sol in falsi_sol_points:
     # highlight the solution points
     plt.vlines(sol, f(sol)-gsize/20, f(sol)+gsize/20, color='red')
+    plt.text(sol, f(sol)+gsize/16, 'x = {x:.5f}'.format(x = sol),
+        horizontalalignment = 'center')
 
 
 plt.subplot(313)
-plt.tight_layout()
 
 plt.title(r"Newton-Raphson", y = 1.03)
 
@@ -173,6 +177,8 @@ plt.hlines(0, min(xlin), max(xlin), 'black')
 for sol in newt_raph_solve_points:
     # highlight the solution points
     plt.vlines(sol, f(sol)-gsize/20, f(sol)+gsize/20, color='red')
+    plt.text(sol, f(sol)+gsize/16, 'x = {x:.5f}'.format(x = sol),
+        horizontalalignment = 'center')
 
-
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 plt.show()
