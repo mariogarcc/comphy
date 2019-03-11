@@ -31,7 +31,8 @@ from .integrate import \
     trapeze_integrate, \
     simpson_integrate, \
     recursive_integrate, \
-    romberg_integrate
+    romberg_integrate, \
+    montecarlo_integrate
 
 from .jacobi_eigenfind import \
     jacobi_eigenfind

@@ -132,3 +132,21 @@ def romberg_integrate(f, interval, upgrade = 5, prec = None, showres = False):
 # if returning r from romberg_integrate:
 # print(*[[r[n][j] for j in r[n].keys()] for n in r.keys()], sep = '\n') # matrix
 # print(*[r[n][len(r[n])] for n in r.keys()], sep = '\n') # diagonal
+
+import random
+def montecarlo_integrate(f, interval, npoints = 1e6):
+    n = int(npoints)
+    a, b = interval
+    v = b-a
+
+    mf, mfsq = 0, 0
+    for i in range(n):
+        d = random.uniform(a, b)
+        mf += f(d)
+        mfsq += f(d)**2
+
+    mf /= n
+    mfsq /= n
+    
+    v, err = v*mf, v*np.sqrt((mfsq - mf**2)/n)
+    return v, err
