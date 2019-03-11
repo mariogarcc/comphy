@@ -5,13 +5,16 @@ import numpy as np
 def deprox_num(num, tol = 4, offset = 0):
     """
     """
-    numstr = str(num)
+    numstr = '{:.24f}'.format(num) if num > 1e-24 else str(num)
     tol = int(tol)
     ov = int(offset) # offset value
     
-    dpl = re.search(r'\.', numstr).start()+1 # decimal point location
-    seqs = re.search(r'(0{{{tol},}}|9{{{tol},}})'.format(tol = tol), numstr[dpl:]) \
-        .start() # (error) sequence start
+    try:
+        dpl = re.search(r'\.', numstr).start()+1 # decimal point location
+        seqs = re.search(r'(0{{{tol},}}|9{{{tol},}})'.format(tol = tol), numstr[dpl:]) \
+            .start() # (error) sequence start
+    except AttributeError: # no regex match
+        return num
 
     # remove the unwanted decimal values from the end
     cn = int(num*10**(seqs+ov+1))/10**(seqs+ov+1) # cut number

@@ -1,11 +1,17 @@
+from package import redact_ex
+
 from package import jacobi_eigenfind
 
-EXERCISE_x = """\
+from package import deprox_num, deprox_arr
+
+
+EXERCISE_25 = """\
 Make a program that is able to compute the eigenvalues and eigenvectors of a
 simetrical matrix using the Jacobi method.\
 """
 
-print('',"EXERCISE:", EXERCISE_x, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_25, 25)
+
 
 import numpy as np
 
@@ -16,4 +22,5 @@ d, v = jacobi_eigenfind(mat)
 
 print("Matrix (M):", mat, sep = '\n', end = '\n\n')
 print("Obtained eigencouples (\u03BB, v):",
-    *[(d[i,i], v[:,i]) for i in range(d.shape[0])], sep = '\n')
+    *[(deprox_num(d[i,i]), deprox_arr(v[:,i])) \
+        for i in range(d.shape[0])], sep = '\n')
