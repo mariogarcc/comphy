@@ -1,3 +1,5 @@
+from package import redact_ex
+
 from package import \
     gauss_reduce, \
     solve_triang_mat, \
@@ -10,7 +12,7 @@ by the Gauss elimination method without pivoting and solution computing
 by regressive substitution.\
 """
 
-print('', "EXERCISE 6:", EXERCISE_6, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_6, 6)
 
 
 import numpy as np

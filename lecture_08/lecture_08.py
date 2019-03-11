@@ -1,3 +1,5 @@
+from package import redact_ex
+
 from package import \
     simpson_integrate, \
     recursive_integrate, \
@@ -10,7 +12,7 @@ in an interval [a, b] using the rule of Simpson 1/3.
 Apply that to the case f(x) = x**3 - 3*x**2 - x + 3 and a = 0, b = 1.35\
 """
 
-print('', "EXERCISE 14:", EXERCISE_14, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_14, 14)
 
 
 import numpy as np
@@ -32,7 +34,7 @@ in an interval [a, b] using the rule of Simpson 3/8.
 Apply that to the case f(x) = x**3 - 3*x**2 - x + 3 and a = 0, b = 1.35\
 """
 
-print('', "EXERCISE 15:", EXERCISE_15, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_15, 15)
 
 
 integral_ab = simpson_integrate(f, interval, method = '3/8', npoints = 1e5)
@@ -47,7 +49,7 @@ in an interval [a, b] using the rule of the recursive trapeze.
 Apply that to the case f(x) = (x**2 + x + 1) * cos(x) and a = 0, b = pi/2\
 """
 
-print('', "EXERCISE 16:", EXERCISE_16, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_16, 16)
 
 
 def f(x):
@@ -68,7 +70,7 @@ in an interval [a, b] using the recursive rule of Simpson 1/3.
 Apply that to the case f(x) = (x**2 + x + 1) * cos(x) and a = 0, b = pi/2\
 """
 
-print('', "EXERCISE 17:", EXERCISE_17, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_17, 17)
 
 
 integral_ab = recursive_integrate(f, interval, method = 'simpson', prec = 1e-12)
@@ -84,7 +86,7 @@ in an interval [a, b] using the Romberg's rule for integration.
 Apply that to the case f(x) = (x**2 + x + 1) * cos(x) and a = 0, b = pi/2\
 """
 
-print('', "EXERCISE 18:", EXERCISE_18, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_18, 18)
 
 
 integral_ab = romberg_integrate(f, interval, prec = 1e-12)

@@ -1,3 +1,5 @@
+from package import redact_ex
+
 from package import dkf
 
 EXERCISE_12 = """\
@@ -6,7 +8,7 @@ of a given function using the method of undetermined coefficients.
 Apply that to the case f(x) = x**3 - 3*x**2 - x + 3 on x0 = 1.2.\
 """
 
-print('', "EXERCISE 12:", EXERCISE_12, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_12, 12)
 
 
 import numpy as np

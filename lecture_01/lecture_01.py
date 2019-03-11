@@ -1,3 +1,5 @@
+from package import redact_ex
+
 from package import \
     find_sols, \
     bisect_solve, \
@@ -12,7 +14,7 @@ analyze the existence of roots in the interval [-2, 4]
 (by dividing [-2, 4] in 20 subintervals and sign-checking)\
 """
 
-print('', "EXERCISE 1:", EXERCISE_1, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_1, 1)
 
 
 import numpy as np
@@ -42,7 +44,7 @@ Given an interval where a function has a single root,
 extrapolate a more precise solution using the bisection method.\
 """
 
-print('', "EXERCISE 2:", EXERCISE_2, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_2, 2)
 
 
 print("Bisection method", end = '\n\n')
@@ -60,7 +62,7 @@ EXERCISE_3 = """\
 Calculate the solutions for f(x) using the Regula Falsi method.\
 """
 
-print('', "EXERCISE 3:", EXERCISE_3, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_3, 3)
 
 print("Regula Falsi method", end = '\n\n')
 falsi_iters = 63
@@ -77,7 +79,7 @@ EXERCISE_4 = """\
 Calculate the roots for f(x) using the Newton-Raphson method.\
 """\
 
-print('', "EXERCISE 4:", EXERCISE_4, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_4, 4)
 
 def df(x):
     return 2*x + np.exp(x) - 3

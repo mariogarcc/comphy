@@ -1,3 +1,5 @@
+from package import redact_ex
+
 from package import \
     gauss_reduce, \
     plu_decomp, plu_solve, \
@@ -26,7 +28,7 @@ by the Gauss elimination method with partial pivoting and solution computing
 by regressive substitution.\
 """
 
-print('', "EXERCISE 7:", EXERCISE_7, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_7, 7)
 
 
 tmat = gauss_reduce(ab, pivoting = 'partial')
@@ -48,7 +50,7 @@ by the Gauss elimination method with full pivoting and solution computing
 by regressive substitution.\
 """
 
-print('', "EXERCISE 8:", EXERCISE_8, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_8, 8)
 
 
 tmat = gauss_reduce(ab, pivoting = 'total')
@@ -69,7 +71,7 @@ Make a program that is able to solve a system of equations
 by the Gauss-Jordan elimination method with full pivoting.\
 """
 
-print('', "EXERCISE 9:", EXERCISE_9, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_9, 9)
 
 
 tmat = gauss_reduce(ab, method = 'gj-elim', pivoting = 'total')
@@ -90,7 +92,7 @@ Make a program that is able to solve a system of equations
 by the Gauss-Jordan inversion method with full pivoting.\
 """
 
-print('', "EXERCISE 10:", EXERCISE_10, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_10, 10)
 
 
 eimat = gauss_reduce(ab, method = 'gj-inv', pivoting = 'total')
@@ -111,7 +113,7 @@ Make a program that is able to solve a system of equations using the
 PLU decomposition method.\
 """
 
-print('', "EXERCISE 11:", EXERCISE_11, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_11, 11)
 
 
 p, l, u, b = plu_decomp(ab)

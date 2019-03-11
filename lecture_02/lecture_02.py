@@ -1,3 +1,5 @@
+from package import redact_ex
+
 from package import \
     find_sols, \
     bisect_solve, \
@@ -8,7 +10,7 @@ EXERCISE_5 = """\
 Find the roots of y(x) = (29.52/(x-0.12)) * e**(-0.686/x) - 11\
 """
 
-print('', "EXERCISE 5:", EXERCISE_5, sep = '\n', end = '\n\n')
+redact_ex(EXERCISE_5, 5)
 
 
 import numpy as np
