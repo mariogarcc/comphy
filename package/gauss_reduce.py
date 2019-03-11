@@ -4,7 +4,7 @@ import numpy as np
 from .solve_algebra import solve_triang_mat
 from .mat_ops import mat_shift
 
-def gauss_reduce(mat, method = 'g-elim', pivoting = 'none',
+def gauss_reduce(mat, method = 'g-elim', pivoting = None,
     shift = 0, inplace = False):
     """
     Solves an extended matrix corresponding to a linear system of
@@ -12,10 +12,10 @@ def gauss_reduce(mat, method = 'g-elim', pivoting = 'none',
     """
 
     # check args
-    pivoting = pivoting.lower()
+    pivoting = pivoting.lower() if pivoting is not None else None
     method = method.lower()
     try:
-        if pivoting not in ['none', 'partial', 'total']:
+        if pivoting not in [None, 'none', 'partial', 'total']:
             raise ValueError("{!r} is not a valid value for `pivoting`"
                 .format(pivoting))
         if method not in ['g-elim', 'gj-elim', 'gj-inv']:
@@ -25,32 +25,35 @@ def gauss_reduce(mat, method = 'g-elim', pivoting = 'none',
         if any([all([coeff for coeff in mat[:,c] == 0]) \
                 for c in range(mat.shape[1]-1)]) == True \
             or mat.shape[1] != mat.shape[0]+1:
-            raise ValueError("{!r}\nis not a valid matrix".format(mat))
+            raise ValueError("\n{!r}\nis not a valid matrix".format(mat))
     except AttributeError:
-        raise ValueError("{!r}\nis not a valid matrix".format(mat))
+        raise ValueError("\n{!r}\nis not a valid matrix".format(mat))
 
     if inplace:
         cmat = mat
     else:
         cmat = copy.deepcopy(mat)
 
+    if (method == 'gj-inv' or method == 'gj-elim') and pivoting is None:
+        pivoting = 'total'
+
+    # it's a good idea to make paper sketches to figure out the indices needed
     neqs = cmat.shape[0]
+    if method == 'gj-inv':
+        ind_terms = cmat[:,-1]
+        cmat = cmat[:,:neqs]
+        cmat = np.hstack((cmat, np.identity(mat.shape[0])))
+
     for i in range(neqs-1):
 
         if pivoting == 'partial':
 
+            rval = None
             for r in range(i+1, neqs):
-                rvals = []
-                if abs(cmat[r,i]) > abs(cmat[i,i]):
-                    rvals.append([cmat[r,i], r])
-            if rvals:
-                if len(rvals) == 1:
-                    nr = rvals[0][1]
-                else:
-                    try:
-                        nr = rvals.index(max([rval[0] for rval in rvals]))[1]
-                    except:
-                        nr = rvals[0]
+                rval = r if abs(cmat[r,i]) > abs(cmat[i,i]) else rval
+            
+            if rval is not None:
+                nr = rval
 
                 temp_mat = copy.deepcopy(cmat)
                 cmat[i,], cmat[nr,] = temp_mat[nr,], temp_mat[i,]
@@ -69,8 +72,6 @@ def gauss_reduce(mat, method = 'g-elim', pivoting = 'none',
             cmat[:,i], cmat[:,max_loc[1]] = temp_mat[:,max_loc[1]], temp_mat[:,i]
 
         for eq in range(i+1, neqs):
-            # i = 0 -> eq = 1, 2
-            # i = 1 -> eq = 2 ... (for a case where size = 3)
             with np.errstate(divide = 'raise', invalid = 'raise'):
                 try:
                     cmat[eq,:] -= cmat[i,:] * cmat[eq,i]/cmat[i,i]

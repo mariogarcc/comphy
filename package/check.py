@@ -21,16 +21,19 @@ def check_sys_sols(sols, mat, lim = 1e-3, verbose = False):
                 # store the maximum value for err
                 maxerr = err if err > maxerr else maxerr
 
-        # store the best permutation
+        if maxerr == 0: # already found exact match
+            return permutation
+
+        # store the best permutation in case of a non-exact match
         if maxerr < minmaxerr:
             minmaxerr = maxerr
             correct_permutation = permutation
 
-    if minmaxerr != 0 and minmaxerr < lim:
+    if minmaxerr != 0 and minmaxerr < lim: # valid solution
         if verbose:
             print("solutions are not exact up to approx. {!r} precision"
                 .format(minmaxerr))
-    elif minmaxerr >= lim:
+    elif minmaxerr >= lim: # invalid solution
         return None
 
     return correct_permutation

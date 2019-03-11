@@ -11,7 +11,7 @@ def solve_ordid(eq):
 
 
 def solve_triang_mat(mat, shape = 'upper-right', method = 'g-elim',
-    check_mat = False):
+    ind_terms = None, check_mat = False):
     """
     Solves a triangular matrix.
     """
@@ -45,11 +45,24 @@ def solve_triang_mat(mat, shape = 'upper-right', method = 'g-elim',
 
         v = mat.shape[1]-1-(rr+1)
 
+        if method == 'gj-inv':
+            temp_mat[r,:] /= temp_mat[r,r]
+
         sr = range(r) if 'upper' in shape else range(r+1, mat.shape[0])
         for s in sr:
             if method == 'g-elim':
                 temp_mat[s,v] *= sol
             elif method == 'gj-elim':
                 temp_mat[s,:] -= temp_mat[r,:] * temp_mat[s,v]/temp_mat[r,r]
+            elif method == 'gj-inv':
+                temp_mat[s,:] -= temp_mat[r,:] * temp_mat[s,r]/temp_mat[r,r]
 
+    if method == 'gj-inv':
+        if ind_terms is None:
+            raise ValueError("""gauss-jordan inversion method requires \
+                the array of independent terms in the input""")
+            return None
+        else:
+            return (temp_mat[:,temp_mat.shape[0]:] @ ind_terms) \
+                .reshape(1, temp_mat.shape[0])[0]
     return sols

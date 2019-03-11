@@ -2,11 +2,15 @@ from .ask import *
 from .bisect import *
 from .check import *
 from .deprox import *
+from .dkfx0 import *
 from .find_sols import *
-from .gauss_solve import *
+from .gauss_reduce import *
 from .gen_lineqsys import *
+from .integrate import *
+from .jacobi_eigenfind import *
 from .mat_ops import *
 from .newt_raph_solve import *
+from .plu import *
 from .printing import *
 from .regula_falsi import *
 from .sign_changes import *

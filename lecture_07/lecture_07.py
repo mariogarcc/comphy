@@ -1,26 +1,25 @@
-from package import *
+from package import trapeze_integrate
 
-# EXERCISE: Make a program that computes the integral of a function f(x)
-# in an interval [a, b] using the rule of the trapeze. Apply that to the case
-# f(x) = x**3 - 3*x**2 - x + 3 and a = 0, b = 1.35
-print("""
-EXERCISE: Make a program that computes the integral of a function f(x)
+
+EXERCISE_13 = """\
+Make a program that computes the integral of a function f(x)
 in an interval [a, b] using the rule of the trapeze. Apply that to the case
-f(x) = x**3 - 3*x**2 - x + 3 and a = 0, b = 1.35
-""")
+f(x) = x**3 - 3*x**2 - x + 3 and a = 0, b = 1.35"""
+
+print('', "EXERCISE 13:", EXERCISE_13, sep = '\n', end = '\n\n')
+
 
 def f(x):
     return x**3 - 3*x**2 - x + 3
 
 interval = [0, 1.35]
-a, b = interval
 
-nk = int(1e6) # number of subintervals
-k = (i+1 for i in range(nk+1))
-delta = (b-a)/nk
-x = (a + delta*(k_i-1) for k_i in k)
-
-integral_ab = (delta/2)*(f(a)+f(b)) + (delta*sum((f(x_k) for x_k in x)))
+integral_ab = trapeze_integrate(f, interval)
 
 print("Integrating f(x) in {!s} yields:".format(interval),
     integral_ab, sep = '\n')
+
+def pf(x): # primitive of f(x)
+    return (1/4)*x**4 - x**3 - (1/2)*x**2 + 3*x
+
+print("Correct result:", pf(1.35)-pf(0), sep = '\n', end = '\n\n')

@@ -35,8 +35,8 @@ def bisect_solve(f, interval, iters = 8, sign_check_func = lambda x, y: x*y < 0,
     if f(sol) == np.inf:
         # cannot avoid using numpy for this
         if verbose:
-            print("y = oo (x = {x}) => false solution".format(x = sol))
-        return None
+            print("solution: x = {x} -> FALSE SOLUTION (y = oo)".format(x = sol))
+        return sol
 
     if verbose:
         print("solution: x = {sol:.6f} (y = {im:.6e})\niterations: {iters}"

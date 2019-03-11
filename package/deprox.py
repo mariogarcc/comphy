@@ -1,15 +1,37 @@
+import re
 import numpy as np
 
-# deprox_num
-# deprox_arr
 
-def deprox_mat(mat, lim = 1e-9):
+def deprox_num(num, tol = 4, offset = 0):
     """
-    Tries to remove floating point errors for 0-value approximations in matrix.
+    """
+    numstr = str(num)
+    tol = int(tol)
+    ov = int(offset) # offset value
+    
+    dpl = re.search(r'\.', numstr).start()+1 # decimal point location
+    seqs = re.search(r'(0{{{tol},}}|9{{{tol},}})'.format(tol = tol), numstr[dpl:]) \
+        .start() # (error) sequence start
+
+    # remove the unwanted decimal values from the end
+    cn = int(num*10**(seqs+ov+1))/10**(seqs+ov+1) # cut number
+    return round(cn, seqs+ov)
+
+
+def deprox_arr(arr, tol = 4, offset = 0):
+    """
+    """
+    return [deprox_num(val) for val in arr]
+
+
+def deprox_mat(mat, tol = 4, offset = 0):
+    """
     """
     for r in range(mat.shape[0]):
         for c in range(mat.shape[1]):
-            if mat[r,c] < lim:
-                mat[r,c] = 0
+            mat[r,c] = deprox_num(mat[r,c],
+                tol = int(np.log10(lim)), offset = offset)
                 
     return mat
+
+# to do: precision kwarg, e.g. to deprox up to a certain decimal point (round)
