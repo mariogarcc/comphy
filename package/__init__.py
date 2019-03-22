@@ -12,6 +12,10 @@ from .deprox import \
     deprox_num, \
     deprox_arr
 
+from .differentiate import \
+    euler_differentiate, \
+    range_kutta_differentiate
+
 from .dkfx0 import \
     dkf
 

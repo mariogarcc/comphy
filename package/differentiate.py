@@ -101,7 +101,7 @@ def range_kutta_differentiate(w, order = 4,
                 tel = delta/div
                 kel = k[i][o-1]/div
                 k[i][o] = w[i](*[delta+tel]+[pvar[j]+kel \
-                    for j in range(1, len(pvar))])
+                    for j in range(len(pvar))])
 
             var[i] += sum(k[i][o]/(3*(1+(o%3 == 0))) \
                 for o in range(order)) # k1/6 + k2/3 + k3/3 + k4/6
