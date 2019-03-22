@@ -26,10 +26,11 @@ def euler_differentiate(w, bounds = None, delta = 1e-3, itern = 1e3,
     if plot:
         plt.rc('text', usetex = True)
         plt.rc('axes', labelsize = fontsize)
+        plt.rc('figure', titlesize = fontsize)
         plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
 
-        plt.figure(figsize = figsize)
-        plt.title(title)
+        fig = plt.figure(figsize = figsize)
+        fig.suptitle(title, x = 0.525, y = 0.975)
 
     for n in range(1, itern+1): # iterate method n times
 
@@ -81,10 +82,11 @@ def range_kutta_differentiate(w, order = 4,
     if plot:
         plt.rc('text', usetex = True)
         plt.rc('axes', labelsize = fontsize)
+        plt.rc('figure', titlesize = fontsize)
         plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
 
-        plt.figure(figsize = figsize)
-        plt.title(title)
+        fig = plt.figure(figsize = figsize)
+        fig.suptitle(title, x = 0.525, y = 0.975)
 
     for n in range(1, itern+1):
 
@@ -95,7 +97,7 @@ def range_kutta_differentiate(w, order = 4,
 
             k[i] = dict()
             k[i][0] = w[i](*[delta]+[pvar[j] for j in range(len(pvar))])
-            # this was for i != 0
+            
             for o in range(1, order):
                 div = (1*(1+(o%3 != 0))) # 1, 2, 2, 1
                 tel = delta/div
@@ -118,7 +120,8 @@ def range_kutta_differentiate(w, order = 4,
 
             oneout = True # first item has already been removed (first plot)
 
-    if plot: plt.tight_layout(rect=[0.05, 0.05, 0.95, 0.95]); plt.show()
+    if plot: plt.tight_layout(rect=[0.00, 0.05, 1.00, 0.95]); plt.show()
+    # rect is left, bottom, right, top
     return None
 
 
@@ -129,9 +132,8 @@ def plot_differential(vec,
     oneout = False):
 
     s = 0; ys = 0
-    nv = len(list(vec.values())) # var input may be useless
-    pp = [[0, i] for i in range(1, nv)] \
-                + list(it.combinations(range(1, nv), 2)) # plot keys
+    nv = len(list(vec.values()))
+    pp = list(it.combinations(range(nv), 2)) # plot keys
     npp = len(pp) # number of plots
 
     vnames = 'txyz'

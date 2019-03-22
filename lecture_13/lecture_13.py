@@ -21,11 +21,13 @@ warnings.filterwarnings('ignore')
 def inct(dt, *o):
     return dt
 
-def incx(dt, x):
+def incx(dt, t, x):
     return dt*np.sin(x)
 
-# euler_differentiate([inct, incx], bounds = [0, 1], delta = 1e-2, itern = 1e4)
-
+print("Computing Euler method...", end='\n\n')
+euler_differentiate([inct, incx], bounds = [0, 1], delta = 1e-2, itern = 1e4,
+    title = r"Euler method for function"
+        + r"$\:\:\frac{dx}{dt} = \sin(x)$")
 
 EXERCISE_27 = """\
 Make a program that is able to graphically integrate the equation
@@ -41,9 +43,9 @@ redact_ex(EXERCISE_27, 27)
 
 
 # dx/dt = y
-# dy/dt = -omega**2*x
+# dy/dt = -omega_0**2*x
 
-omega = 1
+omega_0 = 1
 
 def inct(dt, *o):   
     return dt
@@ -51,13 +53,26 @@ def inct(dt, *o):
 def incx(dt, t, x, y):
     return dt * y
 
-def incy(dt, t, x, y, omega = omega):
-    return dt * (-omega**2*x)
+def incy(dt, t, x, y, omega_0 = omega_0):
+    return dt * (-omega_0**2*x)
 
-# euler_differentiate([inct, incx, incy], bounds = [0, 1, -1],
-#     delta = 1e-2, itern = 1e4S)
-# range_kutta_differentiate([inct, incx, incy], bounds = [0, 1, -1],
-#     delta = 1e-2, order = 4, itern = 1e4)
+print("Computing Euler method...", end='\n\n')
+euler_differentiate([inct, incx, incy], bounds = [0, 1, -1],
+    delta = 1e-2, itern = 1e4, graph = [1, 2],
+    title = r"Euler method for function"
+        + r"$\:\:\frac{d^2x}{dt^2} + \omega_0^2 x = 0$")
+
+print("Computing Range-Kutta method of order 2...", end='\n\n')
+range_kutta_differentiate([inct, incx, incy], bounds = [0, 1, -1],
+    delta = 1e-2, order = 2, itern = 1e4, graph = [1, 2],
+    title = r"Range-Kutta method of order 2 for function"
+        + r"$\:\:\frac{d^2x}{dt^2} + \omega_0^2 x = 0$")
+
+print("Computing Range-Kutta method of order 4...", end='\n\n')
+range_kutta_differentiate([inct, incx, incy], bounds = [0, 1, -1],
+    delta = 1e-2, order = 4, itern = 1e4, graph = [1, 2],
+    title = r"Range-Kutta method of order 4 for function"
+        + r"$\:\:\frac{d^2x}{dt^2} + \omega_0^2 x = 0$")
 
 
 EXERCISE_28 = """\
@@ -68,7 +83,10 @@ d\u00B2x/dt\u00B2 + b dx/dt + \u03C9_0\u00B2 x = 0 using the Euler method.\
 redact_ex(EXERCISE_28, 28)
 
 
-b = 1; omega_0 = 1
+# dx/dt = y
+# dy/dt = -b*y - omega
+
+b = 1/2; omega_0 = 2
 
 def incx(dt, t, x, y):
     return dt * y
@@ -76,9 +94,11 @@ def incx(dt, t, x, y):
 def incy(dt, t, x, y, b = b, omega_0 = omega_0):
     return dt * (-b*y - omega_0**2*x)
 
-
-# euler_differentiate([inct, incx, incy], bounds = [0, 1, -1],
-#     delta = 1e-2, itern = 1e4)
+print("Computing Euler method...", end='\n\n')
+euler_differentiate([inct, incx, incy], bounds = [0, 1, -1],
+    delta = 1e-2, itern = 1e4, graph = [1, 2],
+    title = r"Euler method for function"
+        + r"$\:\:\frac{d^2x}{dt^2} + b \frac{dx}{dt} + \omega_0^2 x = 0$")
 
 
 EXERCISE_29 = """\
@@ -94,7 +114,7 @@ Comment on the effects of \u0394t over the obtained solutions
 redact_ex(EXERCISE_29, 29)
 
 
-b = 1; omega_0 = 4; f = 1/2; omega = 2
+b = 1/2; omega_0 = 4; f = 1; omega = 2
 
 def incx(dt, t, x, y):
     return dt * y
@@ -102,33 +122,41 @@ def incx(dt, t, x, y):
 def incy(dt, t, x, y, b = b, omega_0 = omega_0, f = f, omega = omega):
     return dt * (-b*y - omega_0**2*x + f*np.cos(omega*t))
 
+print("Computing Euler method...", end='\n\n')
+euler_differentiate([inct, incx, incy], bounds = [0, 0, 1],
+    delta = 1e-2, itern = 1e4, graph = [1, 2],
+    title = r"Euler method for function"
+        + r"$\:\:\frac{d^2x}{dt^2} + b \frac{dx}{dt} + \omega_0^2 x = F \cos(\omega t)$")
 
-# euler_differentiate([inct, incx, incy], bounds = [0, 0, 1],
-#     delta = 1e-2, itern = 1e4, graph = [0, 2])
-# range_kutta_differentiate([inct, incx, incy], bounds = [0, 10, -1],
-#     delta = 1e-2, order = 2, itern = 1e4)
-# range_kutta_differentiate([inct, incx, incy], bounds = [0, 10, -1],
-#     delta = 1e-2, order = 4, itern = 1e4)
+print("Computing Range-Kutta method of order 2...", end='\n\n')
+range_kutta_differentiate([inct, incx, incy], bounds = [0, 0, 1],
+    delta = 1e-2, order = 2, itern = 1e4, graph = [1, 2],
+    title = r"Range-Kutta method of order 2 for function"
+        + r"$\:\:\frac{d^2x}{dt^2} + b \frac{dx}{dt} + \omega_0^2 x = F \cos(\omega t)$")
 
-# when omega_0 == omega, movement is a single sinusoidal wave since the start
+print("Computing Range-Kutta method of order 4...", end='\n\n')
+range_kutta_differentiate([inct, incx, incy], bounds = [0, 0, 1],
+    delta = 1e-2, order = 4, itern = 1e4, graph = [1, 2],
+    title = r"Range-Kutta method of order 4 for function"
+        + r"$\:\:\frac{d^2x}{dt^2} + b \frac{dx}{dt} + \omega_0^2 x = F \cos(\omega t)$")
+
+omega = omega_0
+def incy(dt, t, x, y, b = b, omega_0 = omega_0, f = f, omega = omega):
+    return dt * (-b*y - omega_0**2*x + f*np.cos(omega*t))
+
+euler_differentiate([inct, incx, incy], bounds = [0, 0, 1],
+    delta = 1e-2, itern = 1e4, graph = [1, 2],
+    title = r"Euler method for function"
+        + r"$\:\:\frac{d^2x}{dt^2} + b \frac{dx}{dt} + \omega_0^2 x = F \cos(\omega_0 t)$")
+
+# When omega_0 == omega, movement is a single sinusoidal wave since the start
 # rather than a combination of two, as we can see in the early stages
-# of the plots where omega_0 != omega
+# of the plots where omega_0 != omega.
 
 
-
-# overall, all methods have a succesful result dependent on the size of deltat
-# this is because a small deltat is required to detect function changes
+# Overall, all methods have a succesful result dependent on the size of deltat,
+# as one can already expect given the errors' dependencies on
+# deltat for each of the methods.
+# This is because a small deltat is required to detect function changes
 # "as soon as they happen" to provide an accurate representation
-# of the functions
-
-# Take as an example the population exercise (EXERCISE_XX):
-# as prof. said, it describes the size of a population of beings
-# with some birth rate exposed to a number of resources
-# and certain environment conditions. For a given (constant)
-# amount of food and a fixed environment, a population will
-# stabilize its size on some number of members, after some time
-# (i.e. the members without food will end up dying).
-# If this happens very quickly, a deltat chosen too big will
-# not catch the variation of the population since the start
-# up until it becomes stabilized, and therefore the program
-# will only plot a single line, or similar.
+# of the functions.
