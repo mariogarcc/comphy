@@ -9,6 +9,7 @@
             79,
             120
         ],
-        "python.linting.enabled": false
+        "python.linting.enabled": false,
+        "search.usePCRE2": true
 	}
 }
