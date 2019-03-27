@@ -26,7 +26,7 @@ def euler_differentiate(w, bounds = None, delta = 1e-3, itern = 1e3,
         plt.rc('text', usetex = True)
         plt.rc('axes', labelsize = fontsize)
         plt.rc('figure', titlesize = fontsize)
-        plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
+        plt.rc('font', family = 'serif')
 
         fig = plt.figure(figsize = figsize)
         fig.suptitle(title, x = 0.525, y = 0.975)
@@ -82,7 +82,7 @@ def range_kutta_differentiate(w, order = 4,
         plt.rc('text', usetex = True)
         plt.rc('axes', labelsize = fontsize)
         plt.rc('figure', titlesize = fontsize)
-        plt.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
+        plt.rc('font', family = 'serif')
 
         fig = plt.figure(figsize = figsize)
         fig.suptitle(title, x = 0.525, y = 0.975)
@@ -183,7 +183,7 @@ def euler_differentiate_mod(w, bounds = None, delta = 1e-3, itern = 1e3,
         plt.rc('text', usetex = True)
         plt.rc('axes', labelsize = fontsize)
         plt.rc('figure', titlesize = fontsize)
-        plt.rc('font', family = 'serif', serif = 'Computer Modern')
+        plt.rc('font', family = 'serif')
 
         fig = plt.figure(figsize = figsize)
         fig.suptitle(title, x = 0.525, y = 0.975)
