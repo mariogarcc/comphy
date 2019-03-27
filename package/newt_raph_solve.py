@@ -6,8 +6,7 @@ def newt_raph_solve(f, df, asol, iters = 8,
     """
     if iters == 0:
         if verbose:
-            print("solution: x = {sol:.6f} (y = {im:.6e})"
-                      .format(sol=asol, im=f(asol), iters=iters))
+            print(f"solution: x = {asol:.6f} (y = {f(asol):.6e})")
         return asol
     else:
         try:
@@ -15,7 +14,7 @@ def newt_raph_solve(f, df, asol, iters = 8,
             return newt_raph_solve(f, df, asol, iters-1)
         except:
             if verbose:
-                print("stopped at {iters} iterations".format(iters = iters))
+                print(f"stopped at {iters} iterations")
             return asol
         else:
             if verbose:

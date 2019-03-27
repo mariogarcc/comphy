@@ -51,11 +51,10 @@ print("Bisection method", end = '\n\n')
 bisect_iters = 63
 bisect_sol_points = []
 for sol in sols:
-    print("case: solution in {sol}".format(sol = sol))
+    print(f"case: solution in {sol}")
     bisect_sol_points.append(bisect_solve(f, sol, iters = bisect_iters))
-    print("solution: x = {sol}"
-        .format(sol = bisect_sol_points[sols.index(sol)]))
-    print("iterations: {iters}".format(iters = bisect_iters), end = '\n\n')
+    print(f"solution: x = {bisect_sol_points[sols.index(sol)]}"
+    print(f"iterations: {bisect_iters}", end = '\n\n')
 
 
 EXERCISE_3 = """\
@@ -68,11 +67,10 @@ print("Regula Falsi method", end = '\n\n')
 falsi_iters = 63
 falsi_sol_points = []
 for sol in sols:
-    print("case: solution in {sol}".format(sol=sol))
+    print(f"case: solution in {sol}")
     falsi_sol_points.append(falsi_solve(f, sol, iters = falsi_iters))
-    print("solution: x = {sol}"
-        .format(sol = falsi_sol_points[sols.index(sol)]))
-    print("iterations: {iters}".format(iters = falsi_iters), end = '\n\n')
+    print(f"solution: x = {falsi_sol_points[sols.index(sol)]}")
+    print(f"iterations: {falsi_iters}", end = '\n\n')
 
 
 EXERCISE_4 = """\
@@ -94,22 +92,20 @@ print(
 falsi_asols = []
 falsi_aiters = 7
 for sol in sols:
-    print("case: solution in {sol}".format(sol=sol))
+    print(f"case: solution in {sol}")
     falsi_asols.append(falsi_solve(f, sol, iters = falsi_aiters))
-    print("approximated solution: x = {asol}"
-        .format(asol = falsi_asols[sols.index(sol)]))
-    print("iterations: {iters} (regula falsi)"
-        .format(iters = falsi_aiters), end = '\n\n')
+    print(f"approximated solution: x = {falsi_asols[sols.index(sol)]}"
+    print(f"iterations: {falsi_aiters} (regula falsi)", end = '\n\n')
 
 newt_raph_solve_points = []
 newt_raph_iters = 15
 for falsi_asol in falsi_asols:
-    print("case: approximated solution x = {asol}".format(asol=falsi_asol))
+    print(f"case: approximated solution x = {falsi_asol}")
     newt_raph_solve_points.append(newt_raph_solve(f, df, falsi_asol,
         newt_raph_iters))
     print("newton-raphson solution: x = {nrsol}"
         .format(nrsol = newt_raph_solve_points[falsi_asols.index(falsi_asol)]))
-    print("iterations: {iters}".format(iters = newt_raph_iters), end = '\n\n')
+    print(f"iterations: {newt_raph_iters}", end = '\n\n')
 
 
 # plotting 
@@ -141,7 +137,7 @@ plt.hlines(0, min(xlin), max(xlin), 'black')
 for sol in bisect_sol_points:
     # highlight the solution points
     plt.vlines(sol, f(sol)-gsize/20, f(sol)+gsize/20, color = 'red')
-    plt.text(sol, f(sol)+gsize/16, 'x = {x:.5f}'.format(x = sol),
+    plt.text(sol, f(sol)+gsize/16, f'x = {sol:.5f}',
         horizontalalignment = 'center')
 
 
@@ -160,7 +156,7 @@ plt.hlines(0, min(xlin), max(xlin), 'black')
 for sol in falsi_sol_points:
     # highlight the solution points
     plt.vlines(sol, f(sol)-gsize/20, f(sol)+gsize/20, color='red')
-    plt.text(sol, f(sol)+gsize/16, 'x = {x:.5f}'.format(x = sol),
+    plt.text(sol, f(sol)+gsize/16, f'x = {sol:.5f}',
         horizontalalignment = 'center')
 
 
@@ -179,7 +175,7 @@ plt.hlines(0, min(xlin), max(xlin), 'black')
 for sol in newt_raph_solve_points:
     # highlight the solution points
     plt.vlines(sol, f(sol)-gsize/20, f(sol)+gsize/20, color='red')
-    plt.text(sol, f(sol)+gsize/16, 'x = {x:.5f}'.format(x = sol),
+    plt.text(sol, f(sol)+gsize/16, f'x = {sol:.5f}',
         horizontalalignment = 'center')
 
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])

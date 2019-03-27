@@ -30,7 +30,7 @@ sols = find_sols(f, xlin)
 
 sol_points = []
 for sol in sols:
-    print("case: solution in {sol}".format(sol=sol), end = '\n')
+    print(f"case: solution in {sol}", end = '\n')
     sol_point = bisect_solve(f, sol, 63, verbose = True)
     sol_points.append(sol_point)
     print()
@@ -64,7 +64,7 @@ for i, sol in enumerate(sol_points):
     # highlight the solution points
     plt.vlines(sol, f(sol)-gsize/20, f(sol)+gsize/20, color = 'red', zorder = 2)
     plt.text(sol+(0.08 if i != 2 else 0), f(sol)+gsize/(16 if i != 0 else 8),
-        'x = {x:.5f}'.format(x = sol),
+        f'x = {sol:.5f}',
         horizontalalignment = 'center', zorder = 3+i)
 
 

@@ -18,7 +18,7 @@ interval = [0, 1.35]
 
 integral_ab = trapeze_integrate(f, interval)
 
-print("Integrating f(x) in {!s} yields:".format(interval),
+print(f"Integrating f(x) in {interval!s} yields:",
     integral_ab, sep = '\n')
 
 def pf(x): # primitive of f(x)

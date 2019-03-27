@@ -22,7 +22,7 @@ def bisect_solve(f, interval, iters = 8, sign_check_func = lambda x, y: x*y < 0,
                 if sign_check_func(f(half[0]), f(half[1]))][0]
     except IndexError:
         if verbose:
-            print("stopped at {} iterations".format(_))
+            print(f"stopped at {_} iterations")
         if si == interval:
             raise ValueError(
                 "solution was non-existent in the given interval")
@@ -35,10 +35,10 @@ def bisect_solve(f, interval, iters = 8, sign_check_func = lambda x, y: x*y < 0,
     if f(sol) == np.inf:
         # cannot avoid using numpy for this
         if verbose:
-            print("solution: x = {x} -> FALSE SOLUTION (y = oo)".format(x = sol))
+            print(f"solution: x = {sol} -> FALSE SOLUTION (y = oo)")
         return sol
 
     if verbose:
-        print("solution: x = {sol:.6f} (y = {im:.6e})\niterations: {iters}"
-            .format(sol = sol, im = f(sol), iters = iters))
+        print(
+            f"solution: x = {sol:.6f} (y = {f(sol):.6e})\niterations: {iters}")
     return sol

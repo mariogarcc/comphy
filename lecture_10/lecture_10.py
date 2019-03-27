@@ -20,10 +20,8 @@ interval = [0, 1]
 
 integral, integral_err = montecarlo_integrate(f, interval)
 
-print("Integral between {interval!s} for f(x): {result}" \
-    .format(interval = interval, result = integral))
-print("Error for the aboveshown integration: {error:.2e}" \
-    .format(error = integral_err))
+print(f"Integral between {interval!s} for f(x): {integral}")
+print(f"Error for the aboveshown integration: {integral_err:.2e}")
 print()
 
 
@@ -85,7 +83,7 @@ for i in range(1, n+1):
 # if r**2 is area of square and 4*pi*r**2 is area of circle, then pi is
 # 4 times the ratio of points inside the circle
 api = (inc/n)*4
-print("Obtained Pi approximation: \u03A0 = {pi}".format(pi = api))
+print(f"Obtained Pi approximation: \u03A0 = {api}")
 print("Area of circle: \u03A0r\u00B2 = {area:.4f}"
     .format(area = np.pi*1.5**2))
 print("Volume of sphere: 4\u2153\u03A0r\u00B3 = {volume:.4f}"
@@ -151,8 +149,8 @@ xgerr = v*np.sqrt((xmf2-xmf**2)/n)
 ygerr = v*np.sqrt((ymf2-ymf**2)/n)
 
 print("Obtained coordinates for center of mass (x, y):",
-    "({:.6f} \u00B1 {:.6f}, {:.6f} \u00B1 {:.6f})"
-    .format(xg, xgerr, yg, ygerr), sep = '\n', end = '\n\n')
+    f"({xg:.6f} \u00B1 {xgerr:.6f}, {yg:.6f} \u00B1 {ygerr:.6f})",
+    sep = '\n', end = '\n\n')
 
 
 EXERCISE_24 = """\

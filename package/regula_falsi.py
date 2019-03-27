@@ -24,9 +24,8 @@ def falsi_solve(f, interval, iters = 8, sign_check_func = lambda x, y: x*y < 0,
             # because it's either [a, sol] or [sol, b]
             if 0 - f(psol) <= f((interval[0] + interval[1])/2):
                 if verbose:
-                    print("solution: x = {sol:.6f} "
-                          "(y = {im:.6e})\niterations: {iters}"
-                          .format(sol=psol, im=f(psol), iters=iters))
+                    print(f"solution: x = {psol:.6f} "
+                          f"(y = {f(psol):.6e})\niterations: {iters}")
                 return psol
 
         if verbose:
@@ -42,6 +41,6 @@ def falsi_solve(f, interval, iters = 8, sign_check_func = lambda x, y: x*y < 0,
         pass
     sol = (interval[0] + interval[1])/2
     if verbose:
-        print("solution: x = {sol:.6f} (y = {im:.6e})\niterations: {iters}"
-            .format(sol=sol, im=f(sol), iters=iters))
+        print(
+            f"solution: x = {sol:.6f} (y = {f(sol):.6e})\niterations: {iters}")
     return sol

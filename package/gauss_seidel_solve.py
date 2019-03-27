@@ -42,7 +42,7 @@ def gauss_seidel_solve(mat, b = False, asol = None, prec = 1e-9, niter = None,
 
     if d < prec and niter != 0:
         if verbose:
-            print("completed {niter} iterations".format(niter = niter+1))
+            print(f"completed {niter+1} iterations")
         return x
     elif niter != MAX_ITERATIONS:
         return gauss_seidel_solve(a, b, asol = x,

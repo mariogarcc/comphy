@@ -33,7 +33,8 @@ def jacobi_eigenfind(mat, d = None, v = None, prec = 1e-9,
     new_evals = [d[i,i] for i in range(d.shape[0])]
     new_evecs = [v[:,i] for i in range(v.shape[1])]
 
-    eval_convergence = all(d < prec for d in [abs(nev-oev) for (nev, oev) in zip(new_evals, old_evals)])
+    eval_convergence = all(d < prec for d in \
+        [abs(nev-oev) for (nev, oev) in zip(new_evals, old_evals)])
     evec_convergence = all(d < prec for d in \
         [sum([abs(x-ox) for (x, ox) in zip(nevec, oevec)]) \
             for (nevec, oevec) in zip(new_evecs, old_evecs)])
@@ -41,6 +42,6 @@ def jacobi_eigenfind(mat, d = None, v = None, prec = 1e-9,
     convergence = eval_convergence and evec_convergence
 
     if not convergence and itern != MAX_ITERATIONS:
-        return jacobi_eigenfind(mat, d = d, v = v, prec = prec, itern = itern+1)
+        return jacobi_eigenfind(mat, d, v, prec, itern+1)
 
     return d, v
