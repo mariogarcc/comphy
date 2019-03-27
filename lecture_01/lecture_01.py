@@ -8,13 +8,13 @@ from package import \
     ask_continue
 
 
-EXERCISE_1 = """\
+EXERCISE_01 = """\
 Given the function f(x) = x**2 - 3*x + e**x - 2 = 0 , 
 analyze the existence of roots in the interval [-2, 4] 
 (by dividing [-2, 4] in 20 subintervals and sign-checking)\
 """
 
-redact_ex(EXERCISE_1, 1)
+redact_ex(EXERCISE_01, 1)
 
 
 import numpy as np
@@ -39,12 +39,12 @@ print("There {} in: "
     *sols, sep = '\n', end = '\n\n')
 
 
-EXERCISE_2 = """\
+EXERCISE_02 = """\
 Given an interval where a function has a single root, 
 extrapolate a more precise solution using the bisection method.\
 """
 
-redact_ex(EXERCISE_2, 2)
+redact_ex(EXERCISE_02, 2)
 
 
 print("Bisection method", end = '\n\n')
@@ -57,11 +57,11 @@ for sol in sols:
     print(f"iterations: {bisect_iters}", end = '\n\n')
 
 
-EXERCISE_3 = """\
+EXERCISE_03 = """\
 Calculate the solutions for f(x) using the Regula Falsi method.\
 """
 
-redact_ex(EXERCISE_3, 3)
+redact_ex(EXERCISE_03, 3)
 
 print("Regula Falsi method", end = '\n\n')
 falsi_iters = 63
@@ -73,11 +73,11 @@ for sol in sols:
     print(f"iterations: {falsi_iters}", end = '\n\n')
 
 
-EXERCISE_4 = """\
+EXERCISE_04 = """\
 Calculate the roots for f(x) using the Newton-Raphson method.\
 """\
 
-redact_ex(EXERCISE_4, 4)
+redact_ex(EXERCISE_04, 4)
 
 def df(x):
     return 2*x + np.exp(x) - 3

@@ -6,13 +6,13 @@ from package import \
     check_sys_sols
 
 
-EXERCISE_6 = """\
+EXERCISE_06 = """\
 Make a program that is able to solve a system of equations
 by the Gauss elimination method without pivoting and solution computing
 by regressive substitution.\
 """
 
-redact_ex(EXERCISE_6, 6)
+redact_ex(EXERCISE_06, 6)
 
 
 import numpy as np

@@ -22,13 +22,13 @@ print("Expanded matrix (AB):", ab, sep = '\n\n', end = '\n\n')
 print()
 
 
-EXERCISE_7 = """\
+EXERCISE_07 = """\
 Make a program that is able to solve a system of equations
 by the Gauss elimination method with partial pivoting and solution computing
 by regressive substitution.\
 """
 
-redact_ex(EXERCISE_7, 7)
+redact_ex(EXERCISE_07, 7)
 
 
 tmat = gauss_reduce(ab, pivoting = 'partial')
@@ -44,13 +44,13 @@ print("i.e.:", *("x_{i} = {sol_i}"
     sep = '\n', end = '\n\n\n')
 
 
-EXERCISE_8 = """\
+EXERCISE_08 = """\
 Make a program that is able to solve a system of equations
 by the Gauss elimination method with full pivoting and solution computing
 by regressive substitution.\
 """
 
-redact_ex(EXERCISE_8, 8)
+redact_ex(EXERCISE_08, 8)
 
 
 tmat = gauss_reduce(ab, pivoting = 'total')
@@ -66,12 +66,12 @@ print("i.e.:", *("x_{i} = {sol_i}"
     sep = '\n', end = '\n\n\n')
 
 
-EXERCISE_9 = """\
+EXERCISE_09 = """\
 Make a program that is able to solve a system of equations
 by the Gauss-Jordan elimination method with full pivoting.\
 """
 
-redact_ex(EXERCISE_9, 9)
+redact_ex(EXERCISE_09, 9)
 
 
 tmat = gauss_reduce(ab, method = 'gj-elim', pivoting = 'total')

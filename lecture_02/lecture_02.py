@@ -6,11 +6,11 @@ from package import \
     ask_continue
 
 
-EXERCISE_5 = """\
+EXERCISE_05 = """\
 Find the roots of y(x) = (29.52/(x-0.12)) * e**(-0.686/x) - 11\
 """
 
-redact_ex(EXERCISE_5, 5)
+redact_ex(EXERCISE_05, 5)
 
 
 import numpy as np
