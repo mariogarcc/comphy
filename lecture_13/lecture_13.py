@@ -29,6 +29,7 @@ euler_differentiate([inct, incx], bounds = [0, 1], delta = 1e-2, itern = 1e4,
     title = r"Euler method for function"
         + r"$\:\:\frac{dx}{dt} = \sin(x)$")
 
+
 EXERCISE_27 = """\
 Make a program that is able to graphically solve the equation
 d\u00B2x/dt\u00B2 + \u03C9_0\u00B2x = 0 using:
