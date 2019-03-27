@@ -1,4 +1,3 @@
-import copy
 import numpy as np
 import itertools as it
 import matplotlib.pyplot as plt
@@ -20,8 +19,8 @@ def euler_differentiate(w, bounds = None, delta = 1e-3, itern = 1e3,
 
     itern = int(itern)
 
-    var = { i: v for i, v in enumerate(bounds) }
-    vec = { i: [v] for i, v in enumerate(var) } if plot else None
+    var = bounds
+    vec = [[v] for v in var] if plot else None
 
     if plot:
         plt.rc('text', usetex = True)
@@ -34,7 +33,7 @@ def euler_differentiate(w, bounds = None, delta = 1e-3, itern = 1e3,
 
     for n in range(1, itern+1): # iterate method n times
 
-        pvar = copy.deepcopy(var)
+        pvar = [v for v in var]
 
         for i,_ in enumerate(var): # compute new variables
             var[i] += w[i](*[delta]+[pvar[j] for j in range(len(pvar))])
@@ -46,8 +45,8 @@ def euler_differentiate(w, bounds = None, delta = 1e-3, itern = 1e3,
                 shape = shape, names = names, graph = graph,
                 oneout = oneout)
 
-            for key in list(vec.keys()): # resetting vectors for performance
-                vec[key] = [vec[key][-1]]
+            for i in range(len(vec)): # resetting vectors for performance
+                vec[i] = [vec[i][-1]]
 
             oneout = True # first item has already been removed (first plot)
 
@@ -76,8 +75,8 @@ def range_kutta_differentiate(w, order = 4,
     o = int(order)
     assert o == 2 or o == 4
 
-    var = { i: v for i, v in enumerate(bounds) }
-    vec = { i: [v] for i, v in enumerate(var) } if plot else None
+    var = bounds
+    vec = [[v] for v in var] if plot else None
 
     if plot:
         plt.rc('text', usetex = True)
@@ -90,7 +89,7 @@ def range_kutta_differentiate(w, order = 4,
 
     for n in range(1, itern+1):
 
-        pvar = copy.deepcopy(var)
+        pvar = [v for v in var]
         k = dict()
 
         for i,_ in enumerate(var):
@@ -115,8 +114,8 @@ def range_kutta_differentiate(w, order = 4,
                 shape = shape, names = names, graph = graph,
                 oneout = oneout)
 
-            for key in list(vec.keys()): # resetting vectors for performance
-                vec[key] = [vec[key][-1]]
+            for i in range(len(vec)): # resetting vectors for performance
+                vec[i] = [vec[i][-1]]
 
             oneout = True # first item has already been removed (first plot)
 
@@ -132,7 +131,7 @@ def plot_differential(vec,
     oneout = False):
 
     s = 0; ys = 0
-    nv = len(list(vec.values()))
+    nv = len(vec)
     pp = list(it.combinations(range(nv), 2)) # plot keys
     npp = len(pp) # number of plots
 
@@ -152,5 +151,84 @@ def plot_differential(vec,
         plt.xlabel(r'$'+vnames[left]+r'$')
         plt.ylabel(r'$'+vnames[right]+r'$')
         plt.plot(vec[left], vec[right], color = '#3c78f0')
+
+    return None
+
+
+
+
+def euler_differentiate_mod(w, bounds = None, delta = 1e-3, itern = 1e3,
+    plot = True, title = None,
+    shape = 'v', figsize = (10, 6), fontsize = 16,
+    names = 'txyz', graph = 'all',
+    oneout = False, force = False,
+    tols = [10, 0.1], step_mults = [0.1, 10],
+    max_delta = 1, min_delta = 1e-9,
+    verbose = False):
+
+    if bounds is None:
+        bounds = [0]*len(w)
+
+    if not force and itern >= 1e9:
+        raise OverflowError("number of iterations is too big: {!s}" + "\n" + \
+            "you can ignore this error by setting the `force` kwarg to `False`"
+            .format(itern))
+
+    itern = int(itern)
+
+    var = bounds
+    vec = [[v] for v in var] if plot else None
+
+    if plot:
+        plt.rc('text', usetex = True)
+        plt.rc('axes', labelsize = fontsize)
+        plt.rc('figure', titlesize = fontsize)
+        plt.rc('font', family = 'serif', serif = 'Computer Modern')
+
+        fig = plt.figure(figsize = figsize)
+        fig.suptitle(title, x = 0.525, y = 0.975)
+
+    n = 1
+    while n < itern:
+
+        pvar = [v for v in var]
+
+        for i,_ in enumerate(var): # compute new variables
+            var[i] += w[i](*[delta]+[pvar[j] for j in range(len(pvar))])
+
+            if plot: vec[i].append(var[i])
+
+        if plot and n % int(np.sqrt(itern)) == 0: # best performance
+            plot_differential(vec,
+                shape = shape, names = names, graph = graph,
+                oneout = oneout)
+
+            for i in range(len(vec)): # resetting vectors for performance
+                vec[i] = [vec[i][-1]]
+
+            oneout = True # first item has already been removed (first plot)
+
+        fchanges = [abs(var[i]-pvar[i]) for i in range(1, len(var))]
+        fd = max(fchanges)
+
+        if verbose: print(f"delta = {delta}")
+        try:
+            if len(check) > 2:
+                n += 1
+        except:
+            check = []
+        if fd > tols[0]:
+            check.append(n)
+            delta *= step_mults[0] if delta >= min_delta else 1
+        elif fd < tols[1]:
+            check.append(n)
+            delta *= step_mults[1] if delta <= max_delta else 1
+        else:
+            check = []
+            n += 1
+
+    if plot:
+        plt.tight_layout(rect=[0.05, 0.05, 0.95, 0.95])
+        plt.show()
 
     return None

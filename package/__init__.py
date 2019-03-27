@@ -14,7 +14,8 @@ from .deprox import \
 
 from .differentiate import \
     euler_differentiate, \
-    range_kutta_differentiate
+    range_kutta_differentiate, \
+    euler_differentiate_mod
 
 from .dkfx0 import \
     dkf
