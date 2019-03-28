@@ -291,8 +291,11 @@ def euler_differentiate_mod(w, bounds = None, delta = 1e-3, itern = 1e3,
     return None
 
 # ------------------------------------------------------------ #
-
+print()
 # ----------------------- Problem no.1 ----------------------- #
+
+print(f"Exercise {1} follows.")
+ask_continue()
 
 EXERCISE_1 = """\
 Make a program that is able to graphically solve the equation
@@ -342,6 +345,9 @@ range_kutta_differentiate([inct, incx, incy], bounds = [0, 1, -1],
 # ------------------------------------------------------------ #
 
 # ----------------------- Problem no.2 ----------------------- #
+
+print(f"Exercise {2} follows.")
+ask_continue()
 
 EXERCISE_2 = """\
 Make a program that is able to graphically solve the equation
@@ -405,6 +411,9 @@ euler_differentiate([inct, incx, incy], bounds = [0, 0, 1],
 
 # ----------------------- Problem no.3 ----------------------- #
 
+print(f"Exercise {3} follows.")
+ask_continue()
+
 EXERCISE_3 = """\
 Make a program that is able to graphically solve the equation
 dP/dt = rP * (1 - P/k) using:
@@ -445,6 +454,9 @@ range_kutta_differentiate([inct, incp], bounds = [0, 10], order = 4,
 # ------------------------------------------------------------ #
 
 # ----------------------- Problem no.4 ----------------------- #
+
+print(f"Exercise {4} follows.")
+ask_continue()
 
 EXERCISE_4 = """\
 Make a program that is able to graphically solve the set of equations
@@ -502,6 +514,9 @@ range_kutta_differentiate([inct, incx, incy, incz], bounds = ip, order = 4,
 # ------------------------------------------------------------ #
 
 # ----------------------- Problem no.5 ----------------------- #
+
+print(f"Exercise {5} follows.")
+ask_continue()
 
 EXERCISE_5 = """\
 Make a program that is able to graphically solve any of the equations
