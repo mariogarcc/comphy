@@ -14,6 +14,17 @@ import matplotlib.pyplot as plt
 
 # --------------------Function definitions-------------------- #
 
+def ask_continue():
+    response = input("Continue? (y/n)\n")
+    if response.lower() not in ('y', 'n'):
+        return ask_continue()
+    if response.lower() == 'n':
+        return quit()
+
+
+
+
+
 def redact_ex(ex_str, n = '', sep = '\n', end = '\n\n'):
     print('', 'EXERCISE {no:d}:'.format(
         no = int(n) if not isinstance(n, str) else n), ex_str,
@@ -514,6 +525,56 @@ euler_differentiate_mod([inct, incp], bounds = [0, 10],
         + r"with variable-step")
 
 # set kwarg `verbose` to True to see how delta varies
+# notice how, even when having a smaller itern to delta ratio,
+# the function evaluates much further in time than other methods in this case
+
+# ------------------------------------------------------------ #
+
+# ------------------------- Comments ------------------------- #
+
+"""
+Overall, all methods have a succesful result dependent on the size of deltat,
+as one can already expect given the errors' dependencies on
+deltat for each of the methods.
+This is because a small deltat is required to detect function changes
+"as soon as they happen" to provide an accurate representation
+of the functions.
+
+You probably noticed how the sinusoidal functions inclease in amplitude,
+even though they should not. As explained above, this is because the
+"change" in the function, up to when the computer detects it, is delayed
+the given delta. There is another thing to this, which is the "phase"
+of the method, so to say, which I'll try to explain below:
+Say the function shape in one of the sinusoidal peaks goes like this,
+if it were to be represented in discrete steps:
+ / -> / -> -- -> \ -> \ 
+Now imagine the delta is one such that the computer evaluates the function
+every 3 steps and, for some reason, we start evaluating at step 2 (or 1 in
+computer language). Then, the computer would see this:
+ ? -> / -> ? -> ? -> \ 
+What is the consequence of this? Well, the computer has been "thinking" that
+the function has been increasing in value for 3 consecutive steps, while
+in reality it only has been increasing for 1, then stopped, and then started
+decreasing. The result is, as we have seen, slightly increasing amplitudes.
+You can verify this by changing the value of delta. With a smaller delta,
+the effect will be less noticeable, but one could theoretically also find
+some delta and some initial conditions that would make this error disappear,
+because the method's "phase" would be in synchrony with the actual phase
+of the sinusoidal function.
+
+Another good example to explain the importance of smaller deltas
+is the population logistics function (EXERCISE_3):
+as prof. said, it describes the size of a (simple) population of beings
+with some birth rate exposed to a number of resources
+and certain environment conditions. For a given (constant)
+amount of food and a fixed environment, a population will
+stabilize its size on some number of members, after some time
+(i.e. the members without food will end up dying).
+If this happens very quickly, a deltat chosen too big (e.g. 0.1 for this case)
+will not catch the variation of the population since the start
+up until it becomes stabilized, and therefore the program
+will only plot a single line, or similar.
+"""
 
 # ------------------------------------------------------------ #
 

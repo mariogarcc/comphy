@@ -125,6 +125,8 @@ the function has been increasing in value for 3 consecutive steps, while
 in reality it only has been increasing for 1, then stopped, and then started
 decreasing. The result is, as we have seen, slightly increasing amplitudes.
 You can verify this by changing the value of delta. With a smaller delta,
-the effect will be less noticeably, but one could theoretically also find
-some delta and some initial conditions that would make this error disappear.
+the effect will be less noticeable, but one could theoretically also find
+some delta and some initial conditions that would make this error disappear,
+because the method's "phase" would be in synchrony with the actual phase
+of the sinusoidal function.
 """
