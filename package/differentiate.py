@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 def euler_differentiate(w, bounds = None, delta = 1e-3, itern = 1e3,
     plot = True, title = None,
-    shape = 'v', figsize = (10, 6), fontsize = 16,
+    shape = 'v', figsize = (10, 6), figshape = None, fontsize = 16,
     names = 'txyz', graph = 'all',
     oneout = False, force = False):
 
@@ -28,7 +28,14 @@ def euler_differentiate(w, bounds = None, delta = 1e-3, itern = 1e3,
         plt.rc('figure', titlesize = fontsize)
         plt.rc('font', family = 'serif')
 
-        fig = plt.figure(figsize = figsize)
+        if graph == 'all': agraph = range(len(list(
+            it.combinations(range(len(vec)), 2))))
+        else: agraph = graph
+
+        figshape = figshape or (
+            (len(agraph), 1) if shape == 'v' else (1, len(agraph)))
+        
+        fig, ax = plt.subplots(figshape[0], figshape[1], figsize = figsize)
         fig.suptitle(title, x = 0.525, y = 0.975)
 
     for n in range(1, itern+1): # iterate method n times
@@ -41,7 +48,7 @@ def euler_differentiate(w, bounds = None, delta = 1e-3, itern = 1e3,
             if plot: vec[i].append(var[i])
 
         if plot and n % int(np.sqrt(itern)) == 0: # best performance
-            plot_differential(vec,
+            plot_differential(vec, fig, ax,
                 shape = shape, names = names, graph = graph,
                 oneout = oneout)
 
@@ -59,7 +66,7 @@ def euler_differentiate(w, bounds = None, delta = 1e-3, itern = 1e3,
 def range_kutta_differentiate(w, order = 4,
     bounds = None, delta = 1e-3, itern = 1e3,
     plot = True, title = None,
-    shape = 'v', figsize = (10, 6), fontsize = 16,
+    shape = 'v', figsize = (10, 6), figshape = None, fontsize = 16,
     names = 'txyz', graph = 'all',
     oneout = False, force = False):
 
@@ -84,7 +91,14 @@ def range_kutta_differentiate(w, order = 4,
         plt.rc('figure', titlesize = fontsize)
         plt.rc('font', family = 'serif')
 
-        fig = plt.figure(figsize = figsize)
+        if graph == 'all': agraph = range(len(list(
+            it.combinations(range(len(vec)), 2))))
+        else: agraph = graph
+
+        figshape = figshape or (
+            (len(agraph), 1) if shape == 'v' else (1, len(agraph)))
+        
+        fig, ax = plt.subplots(figshape[0], figshape[1], figsize = figsize)
         fig.suptitle(title, x = 0.525, y = 0.975)
 
     for n in range(1, itern+1):
@@ -110,7 +124,7 @@ def range_kutta_differentiate(w, order = 4,
             if plot: vec[i].append(var[i])
 
         if plot and (n % int(np.sqrt(itern)) == 0 or n == itern): # performance
-            plot_differential(vec,
+            plot_differential(vec, fig, ax,
                 shape = shape, names = names, graph = graph,
                 oneout = oneout)
 
@@ -126,18 +140,16 @@ def range_kutta_differentiate(w, order = 4,
 
 
 
-def plot_differential(vec,
+def plot_differential(vec, fig, ax,
     shape = 'v', names = 'txyz', graph = 'all',
     oneout = False):
 
     s = 0; ys = 0
     nv = len(vec)
     pp = list(it.combinations(range(nv), 2)) # plot keys
-    npp = len(pp) # number of plots
 
-    vnames = 'txyz'
-    if graph == 'all': graph = range(npp)
-    else: npp = len(graph)
+    vnames = names
+    if graph == 'all': graph = range(len(pp))
 
     if oneout is False: # fixing plot
         for el in range(nv):
@@ -147,10 +159,14 @@ def plot_differential(vec,
         s += 1
         if s-1 not in graph: continue
         ys += 1
-        plt.subplot(*(npp, 1, ys) if shape == 'v' else (1, npp, ys))
-        plt.xlabel(r'$'+vnames[left]+r'$')
-        plt.ylabel(r'$'+vnames[right]+r'$')
-        plt.plot(vec[left], vec[right], color = '#3c78f0')
+        try:
+            ax[ys-1].set_xlabel(r'$'+vnames[left]+r'$')
+            ax[ys-1].set_ylabel(r'$'+vnames[right]+r'$')
+            ax[ys-1].plot(vec[left], vec[right], color = '#3c78f0')
+        except:
+            ax.set_xlabel(r'$'+vnames[left]+r'$')
+            ax.set_ylabel(r'$'+vnames[right]+r'$')
+            ax.plot(vec[left], vec[right], color = '#3c78f0')
 
     return None
 
@@ -159,7 +175,7 @@ def plot_differential(vec,
 
 def euler_differentiate_mod(w, bounds = None, delta = 1e-3, itern = 1e3,
     plot = True, title = None,
-    shape = 'v', figsize = (10, 6), fontsize = 16,
+    shape = 'v', figsize = (10, 6), figshape = None, fontsize = 16,
     names = 'txyz', graph = 'all',
     oneout = False, force = False,
     tols = [10, 0.1], step_mults = [0.1, 10],
@@ -185,7 +201,14 @@ def euler_differentiate_mod(w, bounds = None, delta = 1e-3, itern = 1e3,
         plt.rc('figure', titlesize = fontsize)
         plt.rc('font', family = 'serif')
 
-        fig = plt.figure(figsize = figsize)
+        if graph == 'all': agraph = range(len(list(
+            it.combinations(range(len(vec)), 2))))
+        else: agraph = graph
+
+        figshape = figshape or (
+            (len(agraph), 1) if shape == 'v' else (1, len(agraph)))
+        
+        fig, ax = plt.subplots(figshape[0], figshape[1], figsize = figsize)
         fig.suptitle(title, x = 0.525, y = 0.975)
 
     n = 1
@@ -199,7 +222,7 @@ def euler_differentiate_mod(w, bounds = None, delta = 1e-3, itern = 1e3,
             if plot: vec[i].append(var[i])
 
         if plot and n % int(np.sqrt(itern)) == 0: # best performance
-            plot_differential(vec,
+            plot_differential(vec, fig, ax,
                 shape = shape, names = names, graph = graph,
                 oneout = oneout)
 
