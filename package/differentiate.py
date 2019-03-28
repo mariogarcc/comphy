@@ -159,11 +159,14 @@ def plot_differential(vec, fig, ax,
         s += 1
         if s-1 not in graph: continue
         ys += 1
-        try:
-            ax[ys-1].set_xlabel(r'$'+vnames[left]+r'$')
-            ax[ys-1].set_ylabel(r'$'+vnames[right]+r'$')
-            ax[ys-1].plot(vec[left], vec[right], color = '#3c78f0')
-        except:
+        if type(ax) == np.ndarray:
+            if type(ax[0]) == np.ndarray:
+                print("figshape not yet supported (use None)")
+            else:
+                ax[ys-1].set_xlabel(r'$'+vnames[left]+r'$')
+                ax[ys-1].set_ylabel(r'$'+vnames[right]+r'$')
+                ax[ys-1].plot(vec[left], vec[right], color = '#3c78f0')
+        else:
             ax.set_xlabel(r'$'+vnames[left]+r'$')
             ax.set_ylabel(r'$'+vnames[right]+r'$')
             ax.plot(vec[left], vec[right], color = '#3c78f0')
