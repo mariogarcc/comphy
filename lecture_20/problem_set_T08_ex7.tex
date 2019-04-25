@@ -1,0 +1,200 @@
+\documentclass[a4paper,3.3mm]{article}
+% to do:
+% pass measurements to parts of metric system
+% https://tex.stackexchange.com/questions/8260/what-are-the-various-units-ex-em-in-pt-bp-dd-pc-expressed-in-mm
+% all corrections
+% sort template
+% MAKE template from this and the notes
+
+% Encoding
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Paper geometry
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{anysize}
+
+% Miscellaneous
+\usepackage[shortlabels]{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xifthen}
+\usepackage{xparse}
+
+% Mathematics & symbols
+\usepackage{amsthm, amsmath, amsfonts, amssymb}
+\usepackage{physics}
+% \usepackage{esdiff}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{braket}
+\usepackage{bm}
+\usepackage{eurosym, gensymb}
+
+% Line formatting ->? miscellaneous
+\usepackage{textcomp}
+\usepackage{txfonts}
+\usepackage{lineno}
+
+% Figures
+\usepackage{hhline}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{subfigure}
+\usepackage{multicol, multirow}
+\usepackage{booktabs, cellspace, adjustbox}
+\usepackage{caption}
+
+
+% Custom commands
+
+% Shorter \mathrm
+\let\nm\mathrm
+\let\mathrm\relax
+
+% Shorter \textit
+\renewcommand{\it}[1]{\textit{#1}}
+
+% Shorter \emph\textbf
+\newcommand{\embf}[1]{\emph{\textbf{#1}}}
+
+% \ref with custom text, using package hyperref
+\newcommand{\cref}[2][\textbf{[?!]}]{\hyperref[#2]{#1}}
+
+% Real number set
+\newcommand{\R}[1]{\varmathbb{R}^{#1}}
+
+% Fractions of pi -> introduce optional argument for numerator
+\newcommand{\fpi}[1]{\frac{\pi}{#1}}
+
+
+% Differential letter
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+% if using esdiff, rename this previous command to \renewcommand*
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^{#1}}}
+
+% Partial differential letter
+\newcommand*\pdiff{\mathop{}\!\partial}
+\newcommand*\pDiff[1]{\mathop{}\!\partial^{#1}}
+
+% Inexact differential letter
+\newcommand*\idiff{\mathop{}\!\text{\dj}}
+\newcommand*\iDiff[1]{\mathop{}\!\text{\dj}^{#1}}
+\let\dbar\dj
+
+% Integral
+\let\integral\int
+
+% Class k (function, curve, etc.) in differentiation context
+\newcommand{\dclass}[1]{\mathcal{C}^{#1}}
+
+% \left( \right) container
+\newcommand{\parn}[1]{\left(#1\right)}
+
+% \left[ \right] container
+\newcommand{\sbra}[1]{\left[#1\right]}
+
+% \left{ \right} container
+\newcommand{\cbra}[1]{\left\{#1\right\}}
+
+
+
+% Page geometry (margins, etc.)
+
+\headheight = 0mm
+\marginsize{14mm}{14mm}{21mm}{21mm} % left right top bottom
+\parindent = 0mm
+\parskip = 7mm
+\marginparwidth = 21mm
+\marginparsep = 7mm
+
+\newcommand{\pindent}{\parindent=5.5mm\indent\parindent=0mm\relax}
+
+% Document information
+
+\title{Análisis de consistencia y estabilidad del esquema Dufort-Frankel para la ecuación de difusión}
+\author{Mario García Cajade}
+\date{}
+
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{Mario García Cajade}
+\renewcommand{\headrulewidth}{0mm}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\renewcommand{\footrulewidth}{0mm}
+
+
+% Document begin
+
+\begin{document}
+
+{
+\centering
+\vspace*{-14mm}
+\fontsize{8mm}{12mm}\selectfont%
+Análisis de consistencia y estabilidad del esquema Dufort-Frankel para la ecuación de difusión\\[-4mm]
+\[ \frac{\partial T}{\partial t} = \alpha\,\frac{\partial^{2} T}{\partial x^{2}} \]
+}
+
+\raggedright
+\fontsize{5.25mm}{7mm}\selectfont
+\section*{\fontsize{7mm}{10.5mm}\selectfont Esquema}
+
+La ecuación del esquema Dufort-Frankel es la siguiente:
+
+\begin{equation}
+    \frac{T_{i}^{n+1} - T_{i}^{n-1}}{2 \Delta t} = \alpha\,\frac{T_{i-1}^{n} - \parn{ T_{i}^{n+1} + T_{i}^{n-1}} + T_{i+1}^{n}}{\Delta x^{2} }
+    \tag{DF}
+\end{equation}
+
+\section*{\fontsize{7mm}{10.5mm}\selectfont Consistencia}
+
+Utilizando expansión de Taylor se obtiene fácilmente
+
+\[
+    \parn{ \frac{\partial T}{\partial t} }_{j}^{n} - \alpha\,\parn{ \frac{\partial^{2} T}{\partial x^{2}} }_{j}^{n} + \alpha\,\frac{\Delta t^{2}}{\Delta x^{2}}\,\parn{ \frac{\partial T}{\partial t} }_{j}^{n} + O\,\parn{ \Delta t^{2},\, \Delta x^{2} }
+\]
+
+Para que exista consistencia debe cumplirse \( \frac{\Delta t}{\Delta x} \rightarrow 0 \)
+también a medida que se mejora la cuadrícula del problema (el número de particiones aumenta y consecuentemente el valor de 
+\(\Delta x\) disminuye), por lo que el esquema será consistente para \( \Delta t << \Delta x \).
+
+\newpage
+\section*{\fontsize{7mm}{10.5mm}\selectfont Estabilidad}
+
+Utilizando el método de Von Neumann se buscan soluciones de la forma
+
+\[
+    T_{j}^{n} = \kappa\,T_{0}\,e^{i\,j\,k\,\Delta x}
+\]
+
+siendo \( k\,\Delta x \) la longitud de onda (\( k \geq 1 \)), \( T_{0} \) el valor inicial de la amplitud y \( \kappa \)
+el factor de amplificación entre intervalos temporales.
+
+En general \( \kappa = \kappa \parn{ k\,\Delta x } \) y tenemos que calcularlo sabiendo que
+
+\[
+    T_{j}^{n+1} = \kappa\,T_{j}^{n}; \quad T_{j}^{n-1} = \frac{1}{\kappa}\,T_{j}^{n}; \quad T_{j \pm 1}^{n} = T_{j}^{n}\,e^{\pm i\,k\,\Delta x}.
+\]
+
+La solución propia del esquema se convierte en
+
+\[
+    \parn{ \kappa - \frac{1}{\kappa} } = 2\,\zeta\,\parn{ 2 \cos(\lambda) - \kappa - \frac{1}{\kappa} }
+\]
+
+con \( \lambda = k\,\Delta x \) y \( \zeta = \alpha\,\frac{\Delta t}{\Delta x^{2}} \). Resultan entonces dos raíces
+
+\[
+    \kappa^{\pm} = \frac{ \zeta\,\cos(\lambda) \pm \sqrt{ 1 - \zeta^{2}\,\sin^{2}(\lambda) } }{ 1 + \zeta }
+\]
+
+cumpliéndose \( \abs{\kappa^{\pm}} \leq 1 \) para todo \(\lambda\) y para todo \(\zeta\), por lo que el esquema es
+incondicionalmente estable.
+
+\end{document}
