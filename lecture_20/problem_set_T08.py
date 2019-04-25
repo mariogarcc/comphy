@@ -49,9 +49,7 @@ def solve_explicit_ode(
         next_grid_row = constructor(next_grid_row, grid)
         next_grid_row, *grid = boundary_conditions(lap, next_grid_row, grid)
 
-        grid = grid[1:] + [next_grid_row]
-
-        if lap == 2: quit()
+        grid = [next_grid_row] + grid[:-1]
 
         if lap % int(1/plot_frequency) == 0:
             try:
@@ -60,10 +58,11 @@ def solve_explicit_ode(
                 plt.pause(0.1)
                 plt.show
             except TclError: # catches error by closing tab manually
+                plt.close('all')
                 return
 
     input("press ENTER to continue\n")
-    plt.close
+    plt.close('all')
     return None
 
 
@@ -80,10 +79,11 @@ def solve_implicit_ode(
 
     for lap in range(itern):
 
-        next_grid_row = constructor_mat @ (constructor_helper_mat @ grid[0])
-        next_grid_row, *grid = boundary_conditions(lap, next_grid_row, grid)
+        constructor_intermediary_arr = constructor_helper_mat @ grid[0]
+        constructor_intermediary_arr = boundary_conditions(lap, constructor_intermediary_arr)
+        next_grid_row = constructor_mat @ constructor_intermediary_arr
 
-        grid = grid[1:] + [next_grid_row]
+        grid = [next_grid_row] + grid[:-1]
 
         if lap % int(1/plot_frequency) == 0:
             try:
@@ -92,10 +92,11 @@ def solve_implicit_ode(
                 plt.pause(0.1)
                 plt.show
             except TclError:
+                plt.close('all')
                 return
 
     input("press ENTER to continue\n")
-    plt.close
+    plt.close('all')
     return None
 
 # ------------------------------------------------------------ #
@@ -103,7 +104,7 @@ print()
 # ----------------------- Problem no.1 ----------------------- #
 
 print(f"Exercise {1} follows.")
-# ask_continue()
+ask_continue()
 
 EXERCISE_1 = """\
 Make a program that is able to graphically solve the equation
@@ -133,7 +134,7 @@ alpha =  1
 s = alpha*deltat/deltax**2
 
 # grid creation and initial conditions
-tprev = tpprev = np.zeros(slices+1)
+tprev = np.zeros(slices+1); tpprev = np.zeros(slices+1)
 tprev[0] = 0; tpprev[0] = 0
 tprev[slices] = 10; tpprev[slices] = 10
 
@@ -186,11 +187,19 @@ def oboundary_conditions(lap, ngr, grid, deltat = deltat):
     slices = len(grid[0])-1
 
     ngr[0] = 0
-    ngr[slices] = 10 * np.sin((lap+1)*deltat/2)
+    ngr[slices] = 10 * abs(np.cos((lap+1)*deltat/2))
 
     egrid = [ngr] + [r for r in grid]
 
     return egrid
+
+# need to re-create the initial_conditions arrays
+tprev = np.zeros(slices+1); tpprev = np.zeros(slices+1)
+tprev[0] = 0; tpprev[0] = 0
+tprev[slices] = 10; tpprev[slices] = 10
+
+initial_conditions = [tprev, tpprev]
+
 
 print("+ Computing...", end='\n\n')
 # solve_explicit_ode(ftcs, initial_conditions, oboundary_conditions,
@@ -209,6 +218,13 @@ def oboundary_conditions(lap, ngr, grid, deltat = deltat):
 
     return egrid
 
+otprev = otpprev = np.zeros(slices+1)
+otprev[8:12] = 5; otpprev[8:12] = 5
+otprev[0] = 0; otpprev[0] = 0
+
+oinitial_conditions = [otprev, otpprev]
+
+
 print("+ Computing...", end='\n\n')
 # solve_explicit_ode(ftcs, oinitial_conditions, oboundary_conditions,
 #     slices, itern, plot_frequency)
@@ -218,7 +234,7 @@ print("+ Computing...", end='\n\n')
 # ----------------------- Problem no.2 ----------------------- #
 
 print(f"Exercise {2} follows.")
-# ask_continue()
+ask_continue()
 
 EXERCISE_2 = """\
 Make a program that is able to graphically solve the previous equation
@@ -241,6 +257,13 @@ def c3tcs(ngr, grid, s = s):
     return ngr
 
 
+tprev = np.zeros(slices+1); tpprev = np.zeros(slices+1)
+tprev[0] = 0; tpprev[0] = 0
+tprev[slices] = 10; tpprev[slices] = 10
+
+initial_conditions = [tprev, tpprev]
+
+
 print("Computing...", end='\n\n')
 # solve_explicit_ode(c3tcs, initial_conditions, boundary_conditions,
 #     slices, itern, plot_frequency)
@@ -250,7 +273,7 @@ print("Computing...", end='\n\n')
 # ----------------------- Problem no.3 ----------------------- #
 
 print(f"Exercise {3} follows.")
-# ask_continue()
+ask_continue()
 
 EXERCISE_3 = """\
 Make a program that is able to graphically solve the previous equation
@@ -279,8 +302,6 @@ def ftc5s(ngr, grid, s = s):
 
 otprev = np.zeros(slices+1)
 otprev[8:12] = 5
-otprev[0] = 0
-otprev[slices] = 10
 
 oinitial_conditions = [otprev]
 
@@ -288,11 +309,11 @@ def oboundary_conditions(lap, ngr, grid, deltat = deltat):
 
     slices = len(grid[0])-1
 
-    # ngr[0] = ngr[1]
-    # ngr[slices] = ngr[slices-1]
+    ngr[1] = ngr[2]
+    ngr[slices-1] = ngr[slices-2]
 
-    # ngr[0] = 0
-    # ngr[slices] = 10
+    ngr[0] = ngr[1]
+    ngr[slices] = ngr[slices-1]
 
     egrid = [ngr] + [r for r in grid]
 
@@ -300,15 +321,15 @@ def oboundary_conditions(lap, ngr, grid, deltat = deltat):
 
 
 print("Computing...", end='\n\n')
-solve_explicit_ode(ftc5s, oinitial_conditions, oboundary_conditions,
-    slices, itern, plot_frequency)
+# solve_explicit_ode(ftc5s, oinitial_conditions, oboundary_conditions,
+#     slices, itern, plot_frequency)
 
 # ------------------------------------------------------------ #
 
 # ----------------------- Problem no.4 ----------------------- #
 
 print(f"Exercise {4} follows.")
-# ask_continue()
+ask_continue()
 
 EXERCISE_4 = """\
 Make a program that is able to graphically solve the previous equation
@@ -329,6 +350,13 @@ def dufort_frankel(ngr, grid, s = s):
     return ngr
 
 
+tprev = np.zeros(slices+1); tpprev = np.zeros(slices+1)
+tprev[0] = 0; tpprev[0] = 0
+tprev[slices] = 10; tpprev[slices] = 10
+
+initial_conditions = [tprev, tpprev]
+
+
 print("Computing...", end='\n\n')
 # solve_explicit_ode(ftcs, initial_conditions, boundary_conditions,
 #     slices, itern, plot_frequency)
@@ -338,7 +366,7 @@ print("Computing...", end='\n\n')
 # ----------------------- Problem no.5 ----------------------- #
 
 print(f"Exercise {5} follows.")
-# ask_continue()
+ask_continue()
 
 EXERCISE_5 = """\
 Make a program that is able to graphically solve the previous equation
@@ -356,16 +384,33 @@ iamat = np.linalg.inv(amat)
 
 iden = np.identity(len(amat))
 
+
+def iftcs_boundary_conditions(lap, ciarr):
+
+    slices = len(ciarr)-1
+
+    ciarr[0] = 0; ciarr[slices] = 10
+
+    return ciarr
+
+
+tprev = np.zeros(slices+1); tpprev = np.zeros(slices+1)
+tprev[0] = 0; tpprev[0] = 0
+tprev[slices] = 10; tpprev[slices] = 10
+
+initial_conditions = [tprev, tpprev]
+
+
 print("Computing...", end='\n\n')
-# solve_implicit_ode(iamat, iden, initial_conditions, boundary_conditions,
-#     slices, itern, plot_frequency)
+solve_implicit_ode(iamat, iden, initial_conditions, iftcs_boundary_conditions,
+    slices, itern, plot_frequency)
 
 # ------------------------------------------------------------ #
 
 # ----------------------- Problem no.6 ----------------------- #
 
 print(f"Exercise {6} follows.")
-# ask_continue()
+ask_continue()
 
 EXERCISE_6 = """\
 Make a program that is able to graphically solve the previous equation
@@ -374,6 +419,7 @@ using the Crank-Nicolson scheme.\
 
 redact_ex(EXERCISE_6, 6)
 
+print("Computing...", end='\n\n')
 
 amat = np.diag([1]+[ 1+s]*(slices-1)+[1])         \
      + np.diag([0]+[-s/2]*(slices-1)+[ ], k = 1)  \
@@ -381,21 +427,29 @@ amat = np.diag([1]+[ 1+s]*(slices-1)+[1])         \
 
 iamat = np.linalg.inv(amat)
 
-a = 0; b = 10
-bmat = np.diag([a]+[ 1-s]*(slices-1)+[b])         \
+bmat = np.diag([1]+[ 1-s]*(slices-1)+[1])         \
      + np.diag([0]+[ s/2]*(slices-1)+[ ], k = 1)  \
      + np.diag([ ]+[ s/2]*(slices-1)+[0], k = -1)
 
+
+def cn_boundary_conditions(lap, ciarr):
+
+    slices = len(ciarr)-1
+
+    ciarr[0] = 0; ciarr[slices] = 10
+
+    return ciarr
+
+tprev = np.zeros(slices+1); tpprev = np.zeros(slices+1)
+tprev[0] = 0; tpprev[0] = 0
+tprev[slices] = 10; tpprev[slices] = 10
+
+initial_conditions = [tprev, tpprev]
+
+
 print("Computing...", end='\n\n')
-# solve_implicit_ode(iamat, bmat, initial_conditions, boundary_conditions,
-#     slices, itern, plot_frequency)
-
-# ------------------------------------------------------------ #
-
-# ------------------------- Comments ------------------------- #
-
-"""
-"""
+solve_implicit_ode(iamat, iden, initial_conditions, cn_boundary_conditions,
+    slices, itern, plot_frequency)
 
 # ------------------------------------------------------------ #
 
