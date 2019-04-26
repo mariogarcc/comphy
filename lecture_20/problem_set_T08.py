@@ -1,7 +1,7 @@
 # Author: Mario García Cajade
-# Date: 21/03/2019
+# Date: 24/04/2019
 
-# Problem set for topic 07: ordinary differential equations
+# Problem set for topic 08: difussion equation in 1d
 
 
 # --------------------------Packages-------------------------- #
