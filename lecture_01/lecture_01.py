@@ -53,7 +53,7 @@ bisect_sol_points = []
 for sol in sols:
     print(f"case: solution in {sol}")
     bisect_sol_points.append(bisect_solve(f, sol, iters = bisect_iters))
-    print(f"solution: x = {bisect_sol_points[sols.index(sol)]}"
+    print(f"solution: x = {bisect_sol_points[sols.index(sol)]}")
     print(f"iterations: {bisect_iters}", end = '\n\n')
 
 
@@ -94,7 +94,7 @@ falsi_aiters = 7
 for sol in sols:
     print(f"case: solution in {sol}")
     falsi_asols.append(falsi_solve(f, sol, iters = falsi_aiters))
-    print(f"approximated solution: x = {falsi_asols[sols.index(sol)]}"
+    print(f"approximated solution: x = {falsi_asols[sols.index(sol)]}")
     print(f"iterations: {falsi_aiters} (regula falsi)", end = '\n\n')
 
 newt_raph_solve_points = []
