@@ -1,3 +1,4 @@
+print()
 """
 Utilizando los conocimientos de la primera parte de la asignatura podemos
 encontrar las soluciones numéricas cualquier una función de una variable.

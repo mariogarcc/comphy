@@ -1,3 +1,4 @@
+print()
 """
 Ahora utilizamos los conocimientos de la segunda parte de la asignatura
 para resolver el problema. El esquema de Dufort-Frankel es extrapolable de
