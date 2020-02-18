@@ -1,11 +1,6 @@
 import numpy as np
 
-a = np.array([[4, -1, 1], [4, -8, 1], [-2, 1, 5]], dtype = float)
-b = np.array([[7], [-21], [15]], dtype = float)
-
-a = a.reshape(len(a), len(a))
-b = b.reshape(len(b), 1)
-ab = np.concatenate((a, b), axis = 1)
+# som tin wong
 
 def gauss_seidel_solve(mat, b = False, asol = None, prec = 1e-9, niter = None,
     verbose = False, MAX_ITERATIONS = 1e3):

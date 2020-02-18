@@ -17,7 +17,7 @@ from .differentiate import \
     range_kutta_differentiate, \
     euler_differentiate_mod
 
-from .dkfx0 import \
+from .dkf import \
     dkf
 
 from .find_sols import \

@@ -33,9 +33,9 @@ def bisect_solve(f, interval, iters = 8, sign_check_func = lambda x, y: x*y < 0,
     sol = (interval[0] + interval[1])/2
 
     if f(sol) == np.inf:
-        # cannot avoid using numpy for this
+        # cannot avoid using numpy for this without using envvar
         if verbose:
-            print(f"solution: x = {sol} -> FALSE SOLUTION (y = oo)")
+            print(f"solution: x = {sol} -> false solution (y = oo)")
         return sol
 
     if verbose:
