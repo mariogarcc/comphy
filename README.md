@@ -2,7 +2,7 @@
 
 To run them in python (from `~/comphy/`):
 
-    python -m TXX.exXX
+    python -m TXX.exXX # without .py
 
 #### Context
 
