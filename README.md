@@ -2,7 +2,7 @@
 
 To run them in python (from `~/comphy/`):
 
-    python -m lecture_XX.lecture_XX
+    python -m TXX.exXX
 
 #### Context
 
