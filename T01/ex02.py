@@ -1,4 +1,11 @@
-from package import *
+from package import redact_ex, ask_continue
+
+from package import \
+    find_sols, \
+    bisect_solve
+
+import numpy as np
+
 
 EXERCISE_02 = """\
 Given an interval where a function ( f(x) = x**2 - 3*x + np.exp(x) - 2 )
@@ -8,8 +15,6 @@ the bisection method.\
 
 redact_ex(EXERCISE_02, 2)
 
-
-import numpy as np
 
 ####################################
 

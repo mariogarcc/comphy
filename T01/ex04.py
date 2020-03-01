@@ -1,4 +1,12 @@
-from package import *
+from package import redact_ex, ask_continue
+
+from package import \
+    find_sols, \
+    falsi_solve, \
+    newt_raph_solve
+
+import numpy as np
+
 
 EXERCISE_04 = """\
 Calculate the roots for f(x) using the Newton-Raphson method.\
@@ -6,8 +14,6 @@ Calculate the roots for f(x) using the Newton-Raphson method.\
 
 redact_ex(EXERCISE_04, 4)
 
-
-import numpy as np
 
 ####################################
 

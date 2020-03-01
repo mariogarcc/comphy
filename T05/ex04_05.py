@@ -1,24 +1,23 @@
 from package import redact_ex
 
-from package import montecarlo_integrate
-
 import numpy as np
+import random
 
 
-EXERCISE_21 = """\
+EXERCISE_04 = """\
 Make a program that computes the area of a circle of radius 1.5 units
 using the Monte Carlo method.\
 """
 
-redact_ex(EXERCISE_21, 21)
+redact_ex(EXERCISE_04, 4)
 
 
-EXERCISE_22 = """\
+EXERCISE_05 = """\
 Make a program that computes the volume of a sphere of radius 1.5 units
 using the Monte Carlo method.\
 """
 
-redact_ex(EXERCISE_22, 22)
+redact_ex(EXERCISE_05, 5)
 
 
 print("""
@@ -27,7 +26,7 @@ and accurate to compute the value of Pi and use it to calculate the desired
 unknowns.
 """)
 
-import random
+
 # import matplotlib.pyplot as plt
 
 # plt.figure(figsize=(6,6))
@@ -60,8 +59,10 @@ for i in range(1, n+1):
 # plt.xlim(0, 1)
 # plt.show()
 
-# if r**2 is area of square and 4*pi*r**2 is area of circle, then pi is
-# 4 times the ratio of points inside the circle
+"""
+if r**2 is area of square and 4*pi*r**2 is area of circle, then pi is
+4 times the ratio of points inside the circle
+"""
 api = (inc/n)*4
 print(f"Obtained Pi approximation: \u03A0 = {api}")
 print("Area of circle: \u03A0r\u00B2 = {area:.4f}"

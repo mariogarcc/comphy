@@ -3,12 +3,12 @@ from package import redact_ex
 import numpy as np
 import random
 
-EXERCISE_24 = """\
+EXERCISE_06 = """\
 Make a program that computes the volume of the part of a torus shown
 in the figure (<figure>) using the Monte Carlo method.\
 """
 
-redact_ex(EXERCISE_24, 24)
+redact_ex(EXERCISE_06, 6)
 
 
 a, b = 1, 3

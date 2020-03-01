@@ -1,20 +1,18 @@
 from package import redact_ex
 
-from package import \
-    simpson_integrate, \
-    recursive_integrate, \
-    romberg_integrate
+from package import simpson_integrate
+
+import numpy as np
 
 
-EXERCISE_15 = """\
+EXERCISE_03 = """\
 Make a program that computes the integral of a function f(x)
 in an interval [a, b] using the rule of Simpson 3/8.
 Apply that to the case f(x) = x**3 - 3*x**2 - x + 3 and a = 0, b = 1.35\
 """
 
-redact_ex(EXERCISE_15, 15)
+redact_ex(EXERCISE_03, 3)
 
-import numpy as np
 
 def f(x):
     return x**3 - 3*x**2 - x + 3

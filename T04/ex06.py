@@ -1,20 +1,18 @@
 from package import redact_ex
 
-from package import \
-    simpson_integrate, \
-    recursive_integrate, \
-    romberg_integrate
+from package import romberg_integrate
+
+import numpy as np
 
 
-EXERCISE_18 = """\
+EXERCISE_06 = """\
 Make a program that computes the integral of a function f(x)
 in an interval [a, b] using the Romberg's rule for integration.
 Apply that to the case f(x) = (x**2 + x + 1) * cos(x) and a = 0, b = pi/2\
 """
 
-redact_ex(EXERCISE_18, 18)
+redact_ex(EXERCISE_06, 6)
 
-import numpy as np
 
 def f(x):
     return (x**2 + x + 1) * np.cos(x)

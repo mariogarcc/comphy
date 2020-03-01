@@ -3,17 +3,17 @@ from package import redact_ex
 from package import montecarlo_integrate
 
 
-EXERCISE_19 = """\
+EXERCISE_01 = """\
 Make a program able to compute the integral between [0, 1] for
 f(x) = (1-x**2)**1.5 using the Monte Carlo method.\
 """
 
-redact_ex(EXERCISE_19, 1)
+redact_ex(EXERCISE_01, 1)
 
 def f(x):
     return (1-x**2)**1.5
 
-interval = [0, 1] # interval
+interval = [0, 1]
 
 integral, integral_err = montecarlo_integrate(f, interval)
 

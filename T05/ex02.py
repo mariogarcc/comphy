@@ -2,16 +2,16 @@ from package import redact_ex
 
 from package import montecarlo_integrate
 
+import numpy as np
 
-EXERCISE_20 = """\
+
+EXERCISE_02 = """\
 Make a program that is able to compute the integral between 0 and infinity
 for f(x) = e**(-x)\
 """
 
-redact_ex(EXERCISE_20, 20)
+redact_ex(EXERCISE_02, 2)
 
-
-import numpy as np
 
 def f(y):
     return (1/y**2) * np.exp(-1/y+1)

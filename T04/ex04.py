@@ -1,21 +1,18 @@
 from package import redact_ex
 
-from package import \
-    simpson_integrate, \
-    recursive_integrate, \
-    romberg_integrate
+from package import recursive_integrate
+
+import numpy as np
 
 
-EXERCISE_16 = """\
+EXERCISE_04 = """\
 Make a program that computes the integral of a function f(x)
 in an interval [a, b] using the rule of the recursive trapeze.
 Apply that to the case f(x) = (x**2 + x + 1) * cos(x) and a = 0, b = pi/2\
 """
 
-redact_ex(EXERCISE_16, 16)
+redact_ex(EXERCISE_04, 4)
 
-
-import numpy as np
 
 def f(x):
     return (x**2 + x + 1) * np.cos(x)

@@ -1,4 +1,13 @@
-from package import *
+from package import redact_ex, ask_continue
+
+from package import \
+    find_sols, \
+    bisect_solve
+
+import numpy as np
+
+import warnings
+warnings.filterwarnings('ignore', category = RuntimeWarning)
 
 EXERCISE_05 = """\
 Find the roots of y(x) = (29.52/(x-0.12)) * e**(-0.686/x) - 11\
@@ -6,10 +15,6 @@ Find the roots of y(x) = (29.52/(x-0.12)) * e**(-0.686/x) - 11\
 
 redact_ex(EXERCISE_05, 5)
 
-
-import numpy as np
-import warnings
-warnings.filterwarnings('ignore', category = RuntimeWarning)
 
 def f(x):
     return (29.52/(x-0.12)) * np.exp(-0.686/x) - 11
@@ -30,6 +35,30 @@ for sol in sols:
     print()
 
 sol_points = sol_points[1:] # ignore the false solution
+"""
+The above can be seen as bad code practice at first.
+Why not just have the function not return false solutions?
+Notice the way we construct the array containing the solutions
+is exterior to the function that retrieves the accurate solution points.
+Therefore, making it return None would just yield a None value inside
+the solution array. This could be then fixed with the line
+
+if sol_point is not None: sol_points.append(sol_point)
+
+but we would not get anything from this operation since this fix is also
+(compared to the fix I have written above) exterior to the main function.
+One could argue this would be a better implementation, since it would allow
+to disregard any number of false solutions indistinctively. However, it could
+be a possibility that we wanted to do something with the false solution
+points, so returning them regardless is actually a better implementation
+since clearing the solutions array from unwanted solution points should
+anyway be done in a separate code block, like it is done above.
+
+Would adding a "false" flag to the main function's returns be a good idea?
+Maybe. However, if dealing with a large number of solutions, you just doubled
+the size of the array with potentially a large percentage of useless data
+(false solutions can be expected analitically).
+"""
 
 # plotting
 print("Plotting follows.")

@@ -3,12 +3,12 @@ from package import redact_ex
 from package import trapeze_integrate
 
 
-EXERCISE_13 = """\
+EXERCISE_01 = """\
 Make a program that computes the integral of a function f(x)
 in an interval [a, b] using the rule of the trapeze. Apply that to the case
 f(x) = x**3 - 3*x**2 - x + 3 and a = 0, b = 1.35"""
 
-redact_ex(EXERCISE_13, 13)
+redact_ex(EXERCISE_01, 1)
 
 
 def f(x):

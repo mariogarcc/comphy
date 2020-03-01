@@ -1,4 +1,12 @@
-from package import *
+from package import redact_ex
+
+from package import \
+    gauss_reduce, \
+    solve_triang_mat, \
+    check_sys_sols, \
+    deprox_arr
+
+import numpy as np
 
 
 EXERCISE_01 = """\
@@ -9,8 +17,6 @@ by regressive substitution.\
 
 redact_ex(EXERCISE_01, 1)
 
-
-import numpy as np
 
 a = np.array([[2, -1, 1], [-1, 1, 2], [1, 2, -1]], dtype = float)
 b = np.array([[3], [7], [2]], dtype = float)
@@ -32,6 +38,7 @@ print("Fixed solutions:", sols, sep = '\n\n', end = '\n\n')
 osols = check_sys_sols(sols, ab)
 if osols is None:
     print("Obtained solutions were incorrect.")
+    quit()
 print("Ordered solutions:", osols, sep = '\n\n', end = '\n\n')
 print("i.e.:", *("x_{i} = {sol_i}"
     .format(i = i+1, sol_i = osols[i]) for i in range(len(osols))),

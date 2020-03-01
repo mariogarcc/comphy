@@ -1,14 +1,17 @@
-from package import *
-import random
-import numpy as np
+from package import redact_ex
 
-EXERCISE_23 = """\
+import numpy as np
+import random
+
+
+EXERCISE_03 = """\
 Make a program that is able to compute the center of mass of the figure,
 (<figure>) assumed homogeneous, using the Monte Carlo method.\
 """
 
-redact_ex(EXERCISE_23, 23)
+redact_ex(EXERCISE_03, 3)
 
+# import matplotlib.pyplot as plt
 
 # plt.figure(figsize = (8, 6))
 
@@ -16,8 +19,7 @@ npoints = 1e6
 n = int(npoints)
 
 l, h = 8, 6 # rectangle of width 8 and height 6
-# empty circle is located at (6, 0) and has radius of 2
-xc, yc, rc = 6, 0, 2
+xc, yc, rc = 6, 0, 2 # empty circle is located at (6, 0) and has radius of 2
 
 xv, yv = 0, 0
 xerr, yerr = 0, 0
@@ -34,19 +36,21 @@ for i in range(n):
     yv += y
     xerr += x**2
     yerr += y**2
-    # xp.append(x)
-    # yp.append(y)
-    # if i % int(np.sqrt(n)) == 0:
-    #     plt.scatter(xp, yp, marker = '.', s = 0.1, )
-    #     xp, yp = [], []
+#     xp.append(x)
+#     yp.append(y)
+#     if i % int(np.sqrt(n)) == 0:
+#         plt.scatter(xp, yp, marker = '.', s = 0.1, )
+#         xp, yp = [], []
 
 # plt.ylim(0, 6)
 # plt.xlim(0, 8)
 # plt.show()
 
-# xg = xv/inc
-# yg = yv/inc
-# or
+"""
+xg = xv/inc
+yg = yv/inc
+or
+"""
 
 v = n/inc
 

@@ -1,8 +1,9 @@
 from package import redact_ex
 
-from package import jacobi_eigenfind
-
-from package import deprox_num, deprox_arr
+from package import \
+    jacobi_eigenfind, \
+    deprox_num, \
+    deprox_arr
 
 
 EXERCISE_01 = """\

@@ -1,4 +1,9 @@
-from package import *
+from package import redact_ex
+
+from package import find_sols
+
+import numpy as np
+
 
 EXERCISE_01 = """\
 Given the function f(x) = x**2 - 3*x + e**x - 2 = 0 , 
@@ -8,8 +13,6 @@ analyze the existence of roots in the interval [-2, 4]
 
 redact_ex(EXERCISE_01, 1)
 
-
-import numpy as np
 
 def f(x):
     return x**2 - 3*x + np.exp(x) - 2

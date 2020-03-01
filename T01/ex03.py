@@ -1,4 +1,11 @@
-from package import *
+from package import redact_ex, ask_continue
+
+from package import \
+    find_sols, \
+    falsi_solve
+
+import numpy as np
+
 
 EXERCISE_03 = """\
 Calculate the solutions for f(x) using the Regula-Falsi method.\
@@ -6,8 +13,6 @@ Calculate the solutions for f(x) using the Regula-Falsi method.\
 
 redact_ex(EXERCISE_03, 3)
 
-
-import numpy as np
 
 ####################################
 

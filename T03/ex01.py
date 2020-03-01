@@ -1,8 +1,6 @@
-from package import \
-    *
-# from package import redact_ex
+from package import redact_ex
 
-# from package import dkf
+from package import dkf
 
 EXERCISE_01 = """\
 Make a program that is able to compute the numerical k-order derivative
