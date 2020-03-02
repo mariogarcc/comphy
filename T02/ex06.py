@@ -2,7 +2,6 @@ from package import redact_ex
 
 from package import \
     plu_decomp, plu_solve, \
-    solve_triang_mat, \
     check_sys_sols, \
     deprox_arr
 
