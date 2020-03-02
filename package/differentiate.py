@@ -210,7 +210,7 @@ def euler_differentiate_mod(w, bounds = None, delta = 1e-3, itern = 1e3,
 
         figshape = figshape or (
             (len(agraph), 1) if shape == 'v' else (1, len(agraph)))
-        
+
         fig, ax = plt.subplots(figshape[0], figshape[1], figsize = figsize)
         fig.suptitle(title, x = 0.525, y = 0.975)
 

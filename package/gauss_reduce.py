@@ -1,7 +1,6 @@
 import copy
 import numpy as np
 
-from .solve_algebra import solve_triang_mat
 from .mat_ops import mat_shift
 
 def gauss_reduce(mat, method = 'g-elim', pivoting = None,
@@ -40,7 +39,6 @@ def gauss_reduce(mat, method = 'g-elim', pivoting = None,
     # it's a good idea to make paper sketches to figure out the indices needed
     neqs = cmat.shape[0]
     if method == 'gj-inv':
-        ind_terms = cmat[:,-1]
         cmat = cmat[:,:neqs]
         cmat = np.hstack((cmat, np.identity(mat.shape[0])))
 
@@ -57,7 +55,7 @@ def gauss_reduce(mat, method = 'g-elim', pivoting = None,
 
                 temp_mat = copy.deepcopy(cmat)
                 cmat[i,], cmat[nr,] = temp_mat[nr,], temp_mat[i,]
-            
+
         if pivoting == 'total':
 
             # get the indices of the maximum absolute value
@@ -78,7 +76,7 @@ def gauss_reduce(mat, method = 'g-elim', pivoting = None,
                 except(ZeroDivisionError, FloatingPointError):
                     if shift > mat.shape[0]-1:
                         raise ValueError("cannot reduce matrix")
-                    gauss_reduce(mat_shift(mat), pivoting = pivoting, 
+                    gauss_reduce(mat_shift(mat), pivoting = pivoting,
                         shift = shift+1)
                     # shifting is only a partial solution
                     # there are neqs! permutations, but that's too many to try

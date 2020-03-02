@@ -2,7 +2,6 @@
 
 # --------------------------------------------------------------------------- #
 
-import numpy as np
 import matplotlib.pyplot as plt
 
 # du/dt = u*(1-v)
@@ -54,7 +53,7 @@ def runge_kutta_differentiate(w, order = 4, delta = 1e-3,
     plt.show()
     # -------------------- #
 
-    return None        
+    return None
 
-runge_kutta_differentiate([inct, incu, incv], delta = 1e-2, 
+runge_kutta_differentiate([inct, incu, incv], delta = 1e-2,
     bounds = [0, 0.5, 0.5], itern = int(1e4))

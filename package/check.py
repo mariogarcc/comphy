@@ -1,5 +1,4 @@
 import itertools as it
-import numpy as np
 
 def check_sys_sols(sols, mat, lim = 1e-3, verbose = False):
     """
@@ -8,7 +7,6 @@ def check_sys_sols(sols, mat, lim = 1e-3, verbose = False):
     permutations = it.permutations(sols)
 
     minmaxerr = 1/lim if ((lim < 1) & (lim != 0)) else lim**2
-    psols = dict()
     for permutation in permutations:
         maxerr = 0
         # check if any sum is wrong: sum(a_ij*x_i) =? b_j +- err

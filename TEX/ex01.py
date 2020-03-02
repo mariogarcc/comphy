@@ -109,7 +109,7 @@ for sol in sols:
     print(f"iterations: {bisect_iters}", end = '\n\n')
 
 
-# plotting 
+# plotting
 plt.figure(figsize = (9, 6))
 plt.title(r"$P(u) = u\,\left[(a-u)\,(u-1) - (b/\gamma)\right]$", fontsize = 16)
 plt.xlabel(r"$u$", fontsize = 16)

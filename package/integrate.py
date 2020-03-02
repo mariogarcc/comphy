@@ -147,6 +147,6 @@ def montecarlo_integrate(f, interval, npoints = 1e6):
 
     mf /= n
     mfsq /= n
-    
+
     v, err = v*mf, v*np.sqrt((mfsq - mf**2)/n)
     return v, err

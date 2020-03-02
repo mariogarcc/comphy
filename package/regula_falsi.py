@@ -10,7 +10,7 @@ def regula_falsi(f, interval):
 def falsi_solve(f, interval, iters = 8, sign_check_func = lambda x, y: x*y < 0,
     verbose = False):
     """
-    Approximates a solution to a function *f* that is known to be in a given 
+    Approximates a solution to a function *f* that is known to be in a given
     interval through `iters` iterations using the regula falsi method.
     """
     si = interval # starting interval

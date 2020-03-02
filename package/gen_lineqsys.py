@@ -41,7 +41,7 @@ def gen_lineqsys(size = 3, sbound = 5, cbound = 5, ntype = 'int',
     
     ind_terms = []
     for r in range(mat.shape[0]):
-        ind_terms.append(sum([c*x for c,x in zip(mat[r,:],sols)]))  
+        ind_terms.append(sum([c*x for c,x in zip(mat[r,:],sols)]))
     ind_terms = np.array(ind_terms).reshape(size, 1)
 
     emat = np.hstack([mat, ind_terms])

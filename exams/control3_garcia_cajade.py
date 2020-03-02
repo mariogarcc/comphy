@@ -47,7 +47,7 @@ for r in range(itern):
     # next row computation
     for j in range(1, slices):
         tnew[j] = (2*s*(tprev[j+1] - tpprev[j] + tprev[j-1]) - c*(tprev[j+1] - tprev[j-1]) + tpprev[j])/(1+2*s)
-    
+
     # dufort-frankel normalization
     tnew = (tnew+tprev)/2
 
