@@ -47,3 +47,4 @@ dmypy.json
 # Miscellaneous
 *test*
 .tex
+*copy.*
