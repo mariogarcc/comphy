@@ -11,7 +11,7 @@ def deprox_num(num, tol = 4, offset = 0):
     numstr = '{:.24f}'.format(num) if num > 1e-24 else str(num)
     tol = int(tol)
     ov = int(offset) # offset value
-    
+
     try:
         dpl = re.search(r'\.', numstr).start()+1 # decimal point location
         seqs = re.search(r'(0{{{tol},}}|9{{{tol},}})'.format(tol = tol), numstr[dpl:]) \

@@ -39,7 +39,7 @@ def simpson_integrate(f, interval, method = '1/3', npoints = 1e6):
             + (6*delta/8)*sum(f(x[3*h+1]) for h in range(int(n-1))) \
             + (9*delta/8)*sum(f(x[3*h-1])+f(x[3*h]) \
                     for h in range(int(n)))
-    
+
     else:
         raise ValueError("invalid value for method: {!s}".format(method))
 
@@ -73,7 +73,7 @@ def recursive_integrate(f, interval, method = 'simpson',
         s = (4*t-pt)/3
 
         v = s if method in 'simpson' else t
-        
+
         i += 1
         try:
             if prec is not None and i == iters and abs(v-pv) > prec:
