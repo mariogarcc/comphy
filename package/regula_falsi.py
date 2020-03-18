@@ -38,7 +38,7 @@ def falsi_solve(f, interval, iters = 8, sign_check_func = lambda x, y: x*y < 0,
     else:
         if verbose:
             print("successfully completed all iterations")
-        pass
+
     sol = (interval[0] + interval[1])/2
     if verbose:
         print(

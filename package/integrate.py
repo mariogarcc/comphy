@@ -48,7 +48,7 @@ def simpson_integrate(f, interval, method = '1/3', npoints = 1e6):
 
 def recursive_integrate(f, interval, method = 'simpson',
     iters = 15, prec = None, verbose = False):
-    
+
     if prec is not None:
         iters = 2
 

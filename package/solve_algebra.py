@@ -61,7 +61,6 @@ def solve_triang_mat(mat, shape = 'upper-right', method = 'g-elim',
         if ind_terms is None:
             raise ValueError("""gauss-jordan inversion method requires \
                 the array of independent terms in the input""")
-            return None
         else:
             return (temp_mat[:,temp_mat.shape[0]:] @ ind_terms) \
                 .reshape(1, temp_mat.shape[0])[0]
