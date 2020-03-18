@@ -38,7 +38,7 @@ def gen_lineqsys(size = 3, sbound = 5, cbound = 5, ntype = 'int',
             mat = coeffs
         else:
             mat = np.vstack([mat, coeffs])
-    
+
     ind_terms = []
     for r in range(mat.shape[0]):
         ind_terms.append(sum([c*x for c,x in zip(mat[r,:],sols)]))

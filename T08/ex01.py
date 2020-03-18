@@ -61,7 +61,7 @@ def ftcs(ngr, grid, s = s):
     for vl in range(1, slices):
         ngr[vl] = \
             grid[0][vl] + s*(grid[0][vl+1] - 2*grid[0][vl] + grid[0][vl-1])
-    
+
     return ngr
 
 

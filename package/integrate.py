@@ -85,7 +85,7 @@ def recursive_integrate(f, interval, method = 'simpson',
                 olderr = True
             if olderr:
                 raise(e)
-    
+
     if verbose:
         print(f"result took {iters} iterations")
 

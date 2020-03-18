@@ -30,7 +30,7 @@ redact_ex(EXERCISE_04, 4)
 sigma = 3; r = 26.5; b = 1
 ip = [0, 0, 1, 0] # initial parameters
 
-def inct(dt, *o):   
+def inct(dt, *o):
     return dt
 
 def incx(dt, t, x, y, z, sigma = sigma):

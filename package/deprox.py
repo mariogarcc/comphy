@@ -38,7 +38,7 @@ def deprox_mat(mat, tol = 4, offset = 0):
             mat[r,c] = deprox_num(mat[r,c],
                 tol = tol, offset = offset)
                 # tol = int(np.log10(lim)), offset = offset)
-  
+
     return mat
 
 # to do: precision kwarg, e.g. to deprox up to a certain decimal point (round)
