@@ -68,3 +68,7 @@ from .sign_changes import \
 from .solve_algebra import \
     solve_ordid, \
     solve_triang_mat
+
+from .solve_ode import \
+    solve_explicit_ode, \
+    solve_implicit_ode
