@@ -2,6 +2,7 @@ from package import redact_ex
 
 from package import dkf
 
+
 EXERCISE_01 = """\
 Make a program that is able to compute the numerical k-order derivative
 of a given function using the method of undetermined coefficients.
@@ -10,8 +11,6 @@ Apply that to the case f(x) = x**3 - 3*x**2 - x + 3 on x0 = 1.2.\
 
 redact_ex(EXERCISE_01, 1)
 
-
-import numpy as np
 
 def f(x):
     return x**3 - 3*x**2 - x + 3

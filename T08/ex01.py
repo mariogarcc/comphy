@@ -1,8 +1,6 @@
 from package import redact_ex
 
-from package import \
-    solve_explicit_ode, \
-    solve_implicit_ode
+from package import solve_explicit_ode
 
 import numpy as np
 

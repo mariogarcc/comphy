@@ -55,5 +55,5 @@ def boundary_conditions(lap, ngr, grid):
 
 
 print("Computing...", end='\n\n')
-solve_implicit_ode(dufort_frankel, initial_conditions, boundary_conditions,
+solve_explicit_ode(dufort_frankel, initial_conditions, boundary_conditions,
     slices, itern, plot_frequency)

@@ -2,8 +2,6 @@ from package import redact_ex
 
 from package import simpson_integrate
 
-import numpy as np
-
 
 EXERCISE_03 = """\
 Make a program that computes the integral of a function f(x)

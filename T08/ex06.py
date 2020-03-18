@@ -1,4 +1,4 @@
-from package import redact_ex, ask_continue
+from package import redact_ex
 
 from package import solve_implicit_ode
 

@@ -1,5 +1,4 @@
 import copy
-import numpy as np
 
 def mat_shift(mat, way = 'down', inplace = False):
     """
