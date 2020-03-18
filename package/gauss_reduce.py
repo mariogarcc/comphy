@@ -49,7 +49,7 @@ def gauss_reduce(mat, method = 'g-elim', pivoting = None,
             rval = None
             for r in range(i+1, neqs):
                 rval = r if abs(cmat[r,i]) > abs(cmat[i,i]) else rval
-            
+
             if rval is not None:
                 nr = rval
 

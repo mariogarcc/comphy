@@ -16,7 +16,7 @@ def seq_sign_changes(arr, i):
 
 def fseq_sign_changes(f, arr, i):
     """
-    Checks whether a sequence's i'th image through a function f has different 
+    Checks whether a sequence's i'th image through a function f has different
     sign from the i+1'th element
     """
     return f(arr[i]) * f(arr[i+1]) < 0

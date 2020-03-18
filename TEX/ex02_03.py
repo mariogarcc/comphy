@@ -69,7 +69,7 @@ for r in range(itern):
     for j in range(1, slices):
         vnew[j] = vprev[j] + deltat*g(uprev[j], vprev[j])
         unew[j] = (2*s*(uprev[j-1] - upprev[j] + uprev[j+1]) + 2*deltat*f(uprev[j], vprev[j]) + upprev[j])/(1+2*s)
-        
+
     # dufort-frankel normalization
     unew = (unew+uprev)/2
 

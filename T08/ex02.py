@@ -34,7 +34,7 @@ def c3tcs(ngr, grid, s = s):
         ngr[vl] = \
             (s*(1.0*grid[0][vl+1] - 2.0*grid[0][vl] + grid[0][vl-1]) \
         +     2.0*grid[0][vl]   - 0.5*grid[1][vl])  / 1.5
-    
+
     return ngr
 
 

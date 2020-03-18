@@ -46,7 +46,7 @@ for sol in sols:
     print(f"solution: x = {bisect_sol_points[sols.index(sol)]}")
     print(f"iterations: {bisect_iters}", end = '\n\n')
 
-# plotting 
+# plotting
 print("Plotting follows.")
 ask_continue()
 

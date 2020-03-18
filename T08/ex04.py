@@ -32,7 +32,7 @@ def dufort_frankel(ngr, grid, s = s):
     for vl in range(1, slices):
         ngr[vl] = \
             2*s/(1+2*s) * (grid[0][vl-1] + grid[0][vl+1]) + (1-2*s)/(1+2*s) * grid[1][vl]
-    
+
     return ngr
 
 

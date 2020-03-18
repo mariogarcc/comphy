@@ -110,7 +110,7 @@ def range_kutta_differentiate(w, order = 4,
 
             k[i] = dict()
             k[i][0] = w[i](*[delta]+[pvar[j] for j in range(len(pvar))])
-            
+
             for o in range(1, order):
                 div = (1*(1+(o%3 != 0))) # 1, 2, 2, 1
                 tel = delta/div

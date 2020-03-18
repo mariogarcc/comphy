@@ -26,7 +26,7 @@ def plu_decomp(cmat):
         rval = None
         for r in range(i+1, neqs):
             rval = r if abs(U[r,i]) > abs(U[i,i]) else rval
-        
+
         if rval is not None:
             nr = rval
 

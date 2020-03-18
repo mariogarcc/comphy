@@ -38,7 +38,7 @@ def solve_implicit_ode(
         constructor_mat, constructor_helper_mat,
         initial_conditions, boundary_conditions,
         slices, itern, plot_frequency = 1):
-    
+
     grid = initial_conditions
     next_grid_row = initial_conditions[0]
 

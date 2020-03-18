@@ -32,6 +32,5 @@ def dkf(f, x0, k, npoints = 5, delta = 0.1):
     a = check_sys_sols(sols, tmat)
 
     dkfx0 = sum([a[i]*f(x0 + b[i]*delta) for i in range(npoints)])/delta**k
-    
-    return dkfx0
 
+    return dkfx0

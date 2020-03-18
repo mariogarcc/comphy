@@ -51,5 +51,5 @@ def gen_lineqsys(size = 3, sbound = 5, cbound = 5, ntype = 'int',
         print("Vector of independent terms (B):", ind_terms, sep = '\n', end = '\n\n')
         print("Extended matrix (AB):", emat, sep = '\n', end = '\n\n')
         print("Solutions to the system:", sols, sep = '\n', end = '\n\n')
-            
+
     return mat, ind_terms, emat, sols

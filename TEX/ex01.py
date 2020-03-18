@@ -43,7 +43,7 @@ def bisect(interval):
 def bisect_solve(f, interval, iters = 8, sign_check_func = lambda x, y: x*y < 0,
     verbose = False):
     """
-    Approximates a solution to a function *f* that is known to be in a given 
+    Approximates a solution to a function *f* that is known to be in a given
     interval through `iters` number of iterations using the bisection method.
     """
     si = interval # starting interval

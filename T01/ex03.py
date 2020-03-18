@@ -44,7 +44,7 @@ for sol in sols:
     print(f"solution: x = {falsi_sol_points[sols.index(sol)]}")
     print(f"iterations: {falsi_iters}", end = '\n\n')
 
-# plotting 
+# plotting
 print("Plotting follows.")
 ask_continue()
 

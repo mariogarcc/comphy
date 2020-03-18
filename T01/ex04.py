@@ -65,7 +65,7 @@ for falsi_asol in falsi_asols:
     print(f"iterations: {newt_raph_iters} (newton-raphson)", end = '\n\n')
 
 
-# plotting 
+# plotting
 print("Plotting follows.")
 ask_continue()
 

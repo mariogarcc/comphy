@@ -23,7 +23,7 @@ redact_ex(EXERCISE_01, 1)
 
 omega_0 = 1
 
-def inct(dt, *o):   
+def inct(dt, *o):
     return dt
 
 def incx(dt, t, x, y):

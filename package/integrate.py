@@ -116,7 +116,7 @@ def romberg_integrate(f, interval, upgrade = 5, prec = None, showres = False):
         for k in range(2, u+1):
             if j >= k:
                 r[j][k] = (4**(k-1) * r[j][k-1] - r[j-1][k-1])/(4**(k-1)-1)
-        
+
     if prec is not None:
         if abs(r[u][u-1] - r[u][u]) > prec:
             return romberg_integrate(f, interval, upgrade = u+1, prec = prec,

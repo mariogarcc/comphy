@@ -29,5 +29,5 @@ def mat_shift(mat, way = 'down', inplace = False):
 
     else:
         raise ValueError("{!r} is not a valid value for `way`".format(way))
-    
+
     return cmat
